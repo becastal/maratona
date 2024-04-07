@@ -12,6 +12,7 @@ using namespace std;
 vector<vector<char>> mapa;
 vector<pair<int, int>> robos;
 vector<pair<int, int>> destinos;
+vector<vector<vector<int, int>>> distancia;
 int n;
 
 void bfs()

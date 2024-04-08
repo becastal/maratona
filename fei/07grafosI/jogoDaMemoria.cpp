@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <stack>
 #define f first
 #define s second
 #define _ ios_base::sync_with_stdio(0);cin.tie(0);
@@ -12,7 +14,6 @@ using namespace std;
 vector<vector<int>> grafo;
 vector<int> distancia;
 vector<int> carta;
-vector<pair<int, int>> pares;
 vector<int> pai;
 int n, m;
 
@@ -22,7 +23,6 @@ int dfs(int origem)
     pai = vector<int>(n);
     stack<int> s;
     s.push(origem); distancia[origem] = 0;
-    int chegada = carta[origem];
 
     while (!s.empty())
     {
@@ -40,9 +40,22 @@ int dfs(int origem)
     return(0);
 }
 
-int distanciaEntrePares(pair<int, int>)
+int distanciaEntreNodos(int v, int u)
 {
-    
+    int p = 0;
+    while (v != u)
+    {
+        if (distancia[v] >= distancia[u])
+        {
+            v = pai[v]; p++;
+        }
+        else
+        {
+            u = pai[u]; p++;
+        }
+    }
+
+    return(p);
 }
 
 int main()
@@ -52,8 +65,12 @@ int main()
     m = n - 1;
 
     carta = vector<int>(n);
-    pares = vector<pair<int, int>>(n / 2);
-    for (int i = 0; i < n; i++) cin >> carta[i];
+    vector<vector<int>> pares (n / 2);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> carta[i];
+        pares[carta[i]-1].push_back(i);
+    }
 
     grafo.resize(n);
     for (int i = 0; i < m; i++)
@@ -65,7 +82,11 @@ int main()
 
     dfs(0);
     int pontos = 0;
-
+    for (int i = 0; i < n / 2; i++)
+    {
+        pontos += distanciaEntreNodos(pares[i][0], pares[i][1]);
+    }
+    cout << pontos << endl;
 
     return(0);
 }

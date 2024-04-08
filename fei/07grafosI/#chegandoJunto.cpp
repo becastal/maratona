@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <stack>
 #define f first
 #define s second
 #define _ ios_base::sync_with_stdio(0);cin.tie(0);
@@ -9,60 +11,82 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-const vector<pair<int, int>> movimentos = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
-vector<vector<char>> mapa;
-vector<pair<int, int>> robos;
-set<pair<int, int>> destinos;
-vector<vector<vector<int>>> distancia;
-int n;
+vector<vector<int>> grafo;
+vector<int> distancia;
+vector<int> carta;
+vector<int> pai;
+int n, m;
 
-bool movimentoValido(pair<int, int> mov)
+int dfs(int origem)
 {
-    bool valido = true;
+    distancia = vector<int>(n, -1);
+    pai = vector<int>(n);
+    stack<int> s;
+    s.push(origem); distancia[origem] = 0;
 
-}
-
-bool chegaramNosDestinos()
-{
-
-}
-
-int bfs()
-{
-    queue<pair<int, int>> q;
-    q.push({0, 0});
-    distancia.resize(n, vector<vector<int>>(n, vector<int>(3, INF)));
-
-    while (!q.empty())
+    while (!s.empty())
     {
-        pair<int, int> v = q.front(); q.pop();
-        for (auto u : movimentos)
+        int v = s.top(); s.pop();
+        for (auto u : grafo[v])
         {
-            if (movimentoValido(u))
+            if (distancia[u] == -1)
             {
-                // sei se eh tao simples!
+                distancia[u] = distancia[v] + 1;
+                pai[u] = v;
+                s.push(u);
             }
         }
     }
+    return(0);
+}
+
+int distanciaEntreNodos(int v, int u)
+{
+    int p = 0;
+    while (v != u)
+    {
+        if (distancia[v] >= distancia[u])
+        {
+            v = pai[v]; p++;
+        }
+        else
+        {
+            u = pai[u]; p++;
+        }
+    }
+
+    return(p);
 }
 
 int main()
 {
-    int T; cin >> T;
-    for (int t = 1; t <= T; t++)
-    {
-        int n; cin >> n;
-        robos = vector<pair<int, int>>(3);
-        for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) 
-        {
-            cin >> mapa[i][j];
-            if (mapa[i][j] >= 'A' && mapa[i][j] <= 'C') robos[mapa[i][j] - 'A'] = {i, j};
-            if (mapa[i][j] == '#') destinos.insert({i, j});
-        }
+    _;
+    cin >> n;
+    m = n - 1;
 
-        int resposta = bfs();
-        cout << "Case " << t << ": ";
-        if (resposta == -1) cout << "trapped" << endl; else cout << resposta << endl;
-    } 
+    carta = vector<int>(n);
+    vector<vector<int>> pares (n / 2);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> carta[i];
+        pares[carta[i]-1].push_back(i);
+    }
+
+    grafo.resize(n);
+    for (int i = 0; i < m; i++)
+    {
+        int a, b; cin >> a >> b; a--, b--;
+        grafo[a].push_back(b);
+        grafo[b].push_back(a);
+    }
+
+    dfs(0);
+    int pontos = 0;
+    for (int i = 0; i < n / 2; i++)
+    {
+        pontos += distanciaEntreNodos(pares[i][0], pares[i][1]);
+    }
+    cout << pontos << endl;
+
     return(0);
 }

@@ -29,7 +29,7 @@ bool movimentosValidos(vector<pair<int, int>> posicoes, pair<int, int> movimento
         pair<int, int> novaPos = { pos.f + movimento.f, pos.s + movimento.s };
         if (novaPos.f >= 0 && novaPos.f < n && novaPos.s >= 0 && novaPos.s < n && mapa[novaPos.f][novaPos.s] != '#') resposta = true;
     }
-    if (resposta) if (distancia[novasPosicoes] != 0) resposta = false;
+    if (resposta) if (distancia.find(novasPosicoes) != distancia.end()) resposta = false;
     return(resposta);
 }
 
@@ -96,6 +96,7 @@ int bfs()
     return (-1);
 }
 
+// algum problema com linhas e colunas.
 int main()
 {
     int T; cin >> T;

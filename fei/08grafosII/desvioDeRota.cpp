@@ -10,27 +10,29 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
 vector<vector<pair<int, int>>> grafo;
-vector<int> preco;
+vector<int> d;
 int n, m, c, k;
 
-int dijkstra(int origem, int destino)
-{
-    preco = vector<int>(n, INF);
-    priority_queue<pair<int, int>> q; q.push({-0, origem});
+void dijkstra(int source, vector<int>& d, vector<vector<pair<int, int>>>& g) {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({ 0, source });
+    d[source] = 0;
 
-    while (!q.empty())
-    {
-        int v = q.top().second, d = -q.top().first;
-        q.pop();
-        if (d > preco[v]) continue;
-        preco[v] = d;
-        for (pair<int, int> u : grafo[v])
-        {
-            int w = d + u.first;
-            if (preco[u.s] > w) q.push({w, u.s});
+    while (!pq.empty()) {
+        int vs = pq.top().s;
+        pq.pop();
+
+        for (auto& p : g[vs]) {
+            int va = p.f;
+            int weight = p.s;
+
+            if (d[va] > d[vs] + weight) 
+            {
+                d[va] = d[vs] + weight;
+                pq.push({ d[va], va });
+            }
         }
     }
-    return(preco[destino]);
 }
 
 int main() 
@@ -38,24 +40,26 @@ int main()
     while (true)
     {
         cin >> n >> m >> c >> k;
-        if (n == 0 && m == 0 && c == 0 && k ==0) break;
+        if (n == 0 && m == 0 && c == 0 && k == 0) break;
 
         grafo = vector<vector<pair<int, int>>>(n);
+        d = vector<int>(n, INF);
         for (int i = 0; i < m; i++)
         {
             int u, v, p;
             cin >> u >> v >> p;
             
-            if ((u >= c && v >= c) || (u < c && v < c && abs(u - v) == 1))
+            if(u >= c && v >= c || u < c && v < c && abs(u-v)==1)
             {
                 grafo[u].push_back({v, p});
-                grafo[u].push_back({v, p});
+                grafo[v].push_back({u, p});
             }
-            else if (u >= c && v < c) grafo[u].push_back({v, p});
-            else if (v >= c && u < c) grafo[u].push_back({u, p});
+            if (u >= c && v < c) grafo[u].push_back({v, p});
+            if (u < c && v >= c) grafo[v].push_back({u, p});
         }
 
-        cout << dijkstra(k, c - n) << endl;
+        dijkstra(k, d, grafo);
+        printf("%d\n", d[c-1]);
     }
     return 0;
 }

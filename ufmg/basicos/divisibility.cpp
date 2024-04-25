@@ -11,9 +11,20 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+int solve(int a, int b)
+{
+    if (a % b == 0) return 0;
+    return abs(((a / b) + 1) * b - a);
+}
+
 int main()
 {
-    int t; cin >> t;
-    
-    return(0);
+    _;
+	int t; cin >> t;
+
+    while (t--)
+    {
+        int a, b; cin >> a >> b;
+        cout << solve(a, b) << endl;
+    }
 }

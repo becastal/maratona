@@ -9,61 +9,29 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-// dijkstra pra cada bandido, marcando a distancia de cada um deles pra cada vertice do grafo. 
-// dijkstra do bino, que tenta chegar no destino mas considerando primeiro sempre os caminhos com menos bandidos.
 int N, C, S, B;
 
-void dijkstraBandidos(int indice, int origem, vector<vector<int>>& d, vector<vector<pair<int, int>>>& g)
+vector<int> dijkstra (int origem, vector<vector<pair<int, int>>>& grafo)
 {
+    vector<int> dist(N, INF);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     pq.push({ 0, origem });
-    d[origem][indice] = 0;
+    dist[origem] = 0;
 
-    while (!pq.empty()) {
-        int vs = pq.top().s;
-        pq.pop();
-
-        for (auto& p : g[vs]) {
-            int va = p.f;
-            int weight = p.s;
-
-            if (d[va][indice] > d[vs][indice] + weight) 
+    while (!pq.empty())
+    {
+        auto u = pq.top(); pq.pop();
+        
+        for (auto v : grafo[u.s])
+        {
+            if (dist[v.f] > dist[u.s] + v.s)
             {
-                d[va][indice] = d[vs][indice] + weight;
-                pq.push({ d[va][indice], va });
+                dist[v.f] = dist[u.s] + v.s;
+                pq.push({ dist[v.f] , v.f });
             }
         }
     }
-}
-
-int dijkstraBino(int origem, int destino, vector<vector<int>>& dBandidos, vector<vector<pair<int, int>>> g)
-{
-    // de algum jeito, esse dijkstra tem que priorizar antes os caminhos em que ele mata menos pessoas e percorre menor distancia;
-    // tambem manter tracking dos bandidos que matou!
-    //
-    // FILA:
-    // os dados sao: < quantidade de bandidos (nao matados!) que, chegando no novo vertice com o novo peso, ele vai encontrar,
-    //                 peso do caminho,
-    //                 indice da nova posicao >
-    // 
-    // usando vector ao inves de priority queue porque eu preciso alterar os valores dele diretamente e acho que daria rolo se tentasse com pq.
-    //
-    // DIST:
-    // os dados sao: < peso ate a posicao, bandidos matados na posicao >
-
-
-    vector<bool> matou(B, false);
-    vector<pair<int, pair<int, int>>> fila;
-    vector<pair<int, int>> distBino (N, {INF, 0});
-
-    fila.push({0, {0, origem}});
-    distBino[origem] = {0, 0};
-
-    while (!fila.empty())
-    {
-        auto u = fila.front();  
-    }
-    return (INF);
+    return (dist);
 }
 
 int main()
@@ -80,14 +48,19 @@ int main()
             grafoBino[a].push_back({b, v}), grafoBino[b].push_back({a, v});
     }
 
-    vector<vector<int>> distBandidos(N, vector<int>(B, INF));
+    vector<int> bandidos(B);
     for (int i = 0; i < B; i++)
-    {
-        int posicao; cin >> posicao; posicao--;
-        dijkstraBandidos(i, posicao, distBandidos, grafoBandidos);
-    }
+        cin >> bandidos[i], bandidos[i]--;
 
-    int binoOrigem, binoDestino; cin >> binoOrigem >> binoDestino; binoOrigem--, binoDestino--;
-    cout << dijkstraBino(origem, destino, distBandidos, grafoBino) << endl;
+    int K, F; cin >> K >> F; K--, F--;
+    vector<int> distBino = dijkstra(F, grafoBino);
+    vector<int> distBandidos = dijkstra(F, grafoBandidos);
+
+    int tempoBino = distBino[K], resposta = 0;
+    for (int i = 0; i < B; i++)
+        if (distBandidos[bandidos[i]] <= tempoBino) resposta++;
+
+    cout << resposta << endl;
+
     return 0;
 }

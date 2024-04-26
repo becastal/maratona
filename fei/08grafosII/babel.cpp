@@ -10,38 +10,39 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
 int m;
-map<string, vector<pair<string, string>>> grafo; // pair<vertice(idioma), aresta(palavra)>
 
-int dijkstra(string origem, string destino)
+int dijkstra(int origem, int destino, map<string, int>& mapa, vector<vector<pair<int, string>>>& grafo)
 {   
-    priority_queue<pair<int, pair<char, string>>, vector<pair<int, pair<char, string>>>, greater<pair<int, pair<char, string>>>> pq;
-    map<string, pair<int, char>> dist;
-    for (auto p : grafo)
-        dist.insert({p.f, {INF, '$'}});
+    priority_queue<pair<int, pair<int, char>>, vector<pair<int, pair<int, char>>>, greater<pair<int, pair<int, char>>>> pq;
+    vector<vector<int>> dist(mapa.size(), vector<int>(26, INF)); // 26 eh o numero de letras no alfabeto. 
     
-    dist[origem] = {0, '$'};
-    pq.push({0, {'$', origem}});
+    for (auto& distLetra : dist[origem])
+        distLetra = 0;
+
+    pq.push({ 0, {origem, 'a'} });
 
     while (!pq.empty())
     {
-        pair<int, pair<char, string>> va = pq.top(); pq.pop();
+        pair<int, pair<int, char>> va = pq.top(); pq.pop();
 
-        for (pair<string, string> vb : grafo[va.s.s])
+        for (pair<int, string> vb : grafo[va.s.f])
         {
-            if (dist[va.s.s].s == vb.s[0]) continue;
+            if (va.s.f != origem && va.s.s == vb.s[0]) continue;
             int w = vb.s.size();
 
-            if (dist[vb.f].f > dist[va.s.s].f + w)
+            if (dist[vb.f][vb.s[0] - 'a'] > dist[va.s.f][va.s.s - 'a'] + w)
             {
-                dist[vb.f].f = dist[va.s.s].f + w;
-                dist[vb.f].s = vb.s[0];
-                pq.push({ dist[vb.f].f, { dist[vb.f].s, vb.f } });
-                // cout << va.s.s << " enxerga " << vb.f << ", vindo com a inicial: " << dist[va.s.s].s << endl;
+                dist[vb.f][vb.s[0] - 'a'] = dist[va.s.f][va.s.s - 'a'] + w;
+                pq.push( {dist[vb.f][vb.s[0] - 'a'], {vb.f, vb.s[0]}} );
             }
         }
     }
 
-    return dist[destino].f;
+    int menor = INF;
+    for (auto caminho : dist[destino])
+        menor = min(menor, caminho);
+
+    return menor;
 }
 
 int main()
@@ -49,14 +50,37 @@ int main()
     while (cin >> m && m != 0)
     {
         string origem, destino; cin >> origem >> destino;
+        vector<vector<pair<int, string>>> grafo;
+        map<string, int> mapa;
+        int contador = 0;
         for (int i = 0; i < m; i++)
         {
             string x, y, w; cin >> x >> y >> w;
-            grafo[x].push_back({y, w});
-            grafo[y].push_back({x, w});
+            int xi, yi;
+            if (mapa.count(x) == 0)
+            {
+                mapa[x] = contador;
+                xi = contador;
+                contador++;
+                grafo.push_back(vector<pair<int, string>>());
+            }
+            else xi = mapa[x];
+            if (mapa.count(y) == 0)
+            {
+                mapa[y] = contador;
+                yi = contador;
+                contador++;
+                grafo.push_back(vector<pair<int, string>>());
+            }
+            else yi = mapa[y];
+
+            grafo[xi].push_back({yi, w});
+            grafo[yi].push_back({xi, w});
         }
 
-        int resp = dijkstra(origem, destino);
+        int resp = INF;
+        if (mapa.count(destino) != 0)
+            resp = dijkstra(mapa[origem], mapa[destino], mapa,  grafo);
         cout << (resp == INF || resp == 0 ? "impossivel" : to_string(resp)) << endl;
     }
 

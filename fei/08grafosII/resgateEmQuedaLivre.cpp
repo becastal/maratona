@@ -12,7 +12,16 @@ using namespace std;
 int n;
 vector<int> id, sz;
 vector<pair<int, int>> herois;
-vector<pair<double, pair<int, int>>> grafo;
+
+struct aresta 
+{
+    int u;
+    int v;
+    double w;
+    bool operator<(const aresta& other) const {
+        return w < other.w;
+    }
+};
 
 int find(int x)
 {
@@ -28,9 +37,25 @@ void unir(int x, int y)
     sz[y] += sz[x];
 }
 
-double distanciaDoisPontos(pair<int, int>& p1, pair<int, int>& p2)
+double distanciaDoisPontos(pair<int, int>& a, pair<int, int>& b)
 {
-    return sqrt((p2.f - p1.f) * (p2.f - p1.f) + (p2.s - p1.s) * (p2.s - p1.s));
+    return sqrt((b.f - a.f) * (b.f - a.f) + (b.s - a.s) * (b.s - a.s));
+}
+
+double kruskal(vector<aresta>& g)
+{
+    id = vector<int>(n + 1); iota(id.begin(), id.end(), 0);
+    sz = vector<int>(n + 1, 1);
+    double soma = 0;
+    for (auto a : g)
+    {
+        if (find(a.u) != find(a.v))
+        {
+            unir(a.u, a.v);
+            soma += a.w;
+        }
+    }
+    return(soma);
 }
 
 int main()
@@ -41,33 +66,24 @@ int main()
     {
         cin >> n;
         herois = vector<pair<int, int>>(n);
-        for (int i = 0; i < n; i++) cin >> herois[i].f >> herois[i].s;
+        for (int i = 0; i < n; i++) 
+            cin >> herois[i].f >> herois[i].s;
 
-        grafo = vector<pair<double, pair<int, int>>>();
-        set<pair<int, int>> conexoes;
+        vector<aresta> arestas;
         for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-            {
-                if (i == j || conexoes.count({j, i}) != 0) continue;
-                double w = distanciaDoisPontos(herois[i], herois[j]);
-                grafo.push_back({ w, {i, j} });
-                conexoes.insert({i, j});
-            }
-
-        sz = vector<int>(grafo.size() + 1, 1);
-        id = vector<int>(grafo.size() + 1);
-        iota(id.begin(), id.end(), 0);
-        sort(grafo.begin(), grafo.end());
-        double teias = 0;
-        for (auto p : grafo)
         {
-            if (find(p.s.f) != find(p.s.s))
+            for (int j = i + 1; j < n; j++)
             {
-                unir(p.s.f, p.s.s);
-                teias += p.f;
+                aresta novaAresta;
+                novaAresta.w = distanciaDoisPontos(herois[i], herois[j]);
+                novaAresta.u = i, novaAresta.v = j;
+                arestas.push_back(novaAresta);
             }
         }
-        cout << fixed << setprecision(2) << teias/100 << endl;
+
+        sort(arestas.begin(), arestas.end());
+        double teias = kruskal(arestas);
+        cout << fixed << setprecision(2) << teias / 100 << endl;
     }
 
     return(0);

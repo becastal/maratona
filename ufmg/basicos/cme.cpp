@@ -9,23 +9,19 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-vector<tuple<char, int, int>> operacoes;
-
 int main()
 {
-    int t; cin >> t;
-    while (t--)
+    int q; cin >> q;
+    while (q--)
     {
-        int a, b; cin >> a >> b;
+        int n, distante; cin >> n;
+        
+        if (n <= 4) 
+            distante = 4;
+        else
+            distante = (n % 2 == 1) ? n + 1 : n;
 
-        int resto = b % 10;
-
-        if (resto)
-            swap(a, b);
-        else 
-            resto = a % 10;
-
-        cout << a - resto << " x " << b << " + " << resto << " x " << b << endl;
+        cout << distante - n << endl;
     }
 
     return(0);

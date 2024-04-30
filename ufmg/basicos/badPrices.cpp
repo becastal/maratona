@@ -9,23 +9,29 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-vector<tuple<char, int, int>> operacoes;
-
 int main()
 {
     int t; cin >> t;
+
     while (t--)
     {
-        int a, b; cin >> a >> b;
+        int n; cin >> n;
 
-        int resto = b % 10;
+        vector<int> v(n);
 
-        if (resto)
-            swap(a, b);
-        else 
-            resto = a % 10;
+        for (auto& ai : v)
+            cin >> ai;
+        
+        int resp = 0, menor = v[n - 1];
+        for (int i = n - 2; i >= 0; i--)
+        {
+            if (v[i] > menor)
+                resp++;
 
-        cout << a - resto << " x " << b << " + " << resto << " x " << b << endl;
+            menor = min(v[i], menor);
+        }
+
+        cout << resp << endl;
     }
 
     return(0);

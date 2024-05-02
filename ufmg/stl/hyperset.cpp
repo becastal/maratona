@@ -12,6 +12,6 @@ using namespace std;
 int main()
 {
     _;
-    
+    // dica: pesquisar sobre "ordered statistic set"
     return(0);
 }

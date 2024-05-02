@@ -23,19 +23,21 @@ int main()
             cin >> ai;
 
         sort(v.begin(), v.end());
-        vector<pair<int, int>> resp;
+        vector<int> resp;
 
-        int i = 0, j = v.size();
+        int i = 0, j = v.size() - 1;
         while (i <= j)
         {
-            resp.push_back({v[i], v[j]});
+            if (i != j) resp.push_back(v[j]);
+            resp.push_back(v[i]);
             i++, j--;
         }
-        reverse(resp.begin(), resp.end());
 
-        for (auto p : resp)
-            cout << p.f << " " << p.s << " ";
+        reverse(resp.begin(), resp.end());
         
+        for (auto p : resp)
+            cout << p << endl;
+
         cout << endl;
     }
 

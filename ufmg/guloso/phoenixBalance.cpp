@@ -12,15 +12,26 @@ using namespace std;
 int main()
 {
     _;
+    
     int t; cin >> t;
+    vector<int> pot(31, 1);
+    
+    for (int i = 1; i <= 31; i++)
+        pot[i] = pot[i - 1] * 2;
+
     while (t--)
     {
-        int x, n, m; cin >> x >> n >> m;
-        
-        while (x > 0 && n && x / 2 + 10 < x)
-            n--, x = x / 2 + 10;
+        int n; cin >> n;
 
-        cout << (x <= m * 10 ? "YES" : "NO") << endl;
-   } 
+        int a = pot[n], b = 0;
+        for (int i = 1; i < n / 2; i++)
+            a += pot[i];
+        
+        for (int i = n / 2; i < n; i++)
+            b += pot[i];
+
+        cout << abs(a - b) << endl;
+    }
+
     return(0);
 }

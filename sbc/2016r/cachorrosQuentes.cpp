@@ -12,15 +12,7 @@ using namespace std;
 int main()
 {
     _;
-    int t; cin >> t;
-    while (t--)
-    {
-        int x, n, m; cin >> x >> n >> m;
-        
-        while (x > 0 && n && x / 2 + 10 < x)
-            n--, x = x / 2 + 10;
-
-        cout << (x <= m * 10 ? "YES" : "NO") << endl;
-   } 
+    double h, p; cin >> h >> p;
+    cout << fixed << setprecision(2) << (h / p) << endl; 
     return(0);
 }

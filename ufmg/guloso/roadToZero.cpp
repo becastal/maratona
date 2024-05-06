@@ -12,15 +12,21 @@ using namespace std;
 int main()
 {
     _;
-    int t; cin >> t;
+    
+    ll t; cin >> t;
+
     while (t--)
     {
-        int x, n, m; cin >> x >> n >> m;
+        ll x, y; cin >> x >> y;
+        ll a, b; cin >> a >> b;
         
-        while (x > 0 && n && x / 2 + 10 < x)
-            n--, x = x / 2 + 10;
+        b = min(2 * a, b);
 
-        cout << (x <= m * 10 ? "YES" : "NO") << endl;
-   } 
+        if (x < y) 
+            swap(x, y);
+
+        cout << (y * b + (x - y) * a) << endl;
+    }
+
     return(0);
 }

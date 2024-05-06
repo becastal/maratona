@@ -11,6 +11,21 @@ using namespace std;
 
 int main()
 {
-    
+    stack<char> caracteres;
+    int pares = 0;
+
+    string s; cin >> s;
+    for (auto c : s)
+    {
+        if (!caracteres.empty() && c == caracteres.top())
+        {
+            caracteres.pop();
+            pares++;
+        }
+        else
+            caracteres.push(c);
+    }
+
+    cout << (pares % 2 ? "Yes" : "No") << endl;
     return(0);
 }

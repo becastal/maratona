@@ -9,20 +9,32 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-int solve()
+bool sinal(int x)
 {
-    int n; cin >> n;
-    vector<int> nums(n);
+    return (x > 0 ? true : false);
+}
+
+ll solve()
+{
+    ll n; cin >> n;
+    vector<ll> nums(n);
 
     for (auto& ni : nums)
         cin >> ni;
 
-    sort(nums.begin(), nums.end());
-    bool sinal = true;
+    ll soma = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int j = i;
+        ll agora = nums[i];
+        while (j < n && sinal(nums[i]) == sinal(nums[j]))
+            agora = max(agora, nums[j]), j++;
 
-    int i = 0, j = n - 1, soma = 0;
-    vector<int> alternado;
-    
+        soma += agora;
+        i = j - 1;
+    } 
+
+    return soma;
 }
 
 int main()

@@ -48,22 +48,13 @@ struct line { // reta
 	}
 };
 
-ld sarea(pt p, pt q, pt r) { // area com sinal
-	return ((q-p)^(r-q))/2;
-}
-
 ld dist(pt p, pt q) { // distancia
 	return hypot(p.y - q.y, p.x - q.x);
 }
 
-ld disttoline(pt p, line r) { // distancia do ponto a reta
-	return 2 * abs(sarea(p, r.p, r.q)) / dist(r.p, r.q);
-}
-
-ld disttoseg(pt p, line r) { // distancia do ponto ao seg
-	if ((r.q - r.p)*(p - r.p) < 0) return dist(r.p, p);
-	if ((r.p - r.q)*(p - r.q) < 0) return dist(r.q, p);
-	return disttoline(p, r);
+bool isonseg(pt p, line r) { // se p pertence à reta de r
+    pt a = r.p - p, b = r.q - p;
+    return eq((a ^ b), 0);
 }
 
 bool isleft(pt p, line r) {
@@ -73,31 +64,30 @@ bool isleft(pt p, line r) {
 int main()
 {
     _;
-    int n;
-    while (cin >> n && n)
+    line via;
+    cin >> via;
+
+    int n; cin >> n;
+    
+    int pOeste = 0, hOeste = 0;
+    int pLeste = 0, hLeste = 0;
+    int causalidades = 0;
+    for (int i = 0; i < n; i++)
     {
-        vector<pt> pts(n);
-        for (auto& p : pts)
-            cin >> p;
-
-        ld maior = DINF;
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-            {
-                line l; l.p = pts[i], l.q = pts[j];
-                ld sE = 0, sD = 0;
-                for (auto p : pts)
-                {
-                    if (isleft(p, l))
-                       sE += disttoline(p, l); 
-                    else
-                       sD += disttoline(p, l);
-                }
-                maior = min(maior, abs(sE - sD));
-            }
-
-        printf("%.3f\n", maior);
+        pt planeta; cin >> planeta;
+        int h; cin >> h;
+        if (isonseg(planeta, via))
+            causalidades++;
+        else if (isleft(planeta, via))
+            pOeste++, hOeste += h;
+        else
+            pLeste++, hLeste += h;
     }
-
+   
+    cout << "Relatorio Vogon #35987-2" << endl;
+    cout << "Distancia entre referencias: " << fixed << setprecision(2) << dist(via.p, via.q) << " anos-luz" << endl;
+    cout << "Setor Oeste:\n- " << pOeste << " planeta(s)\n- " << hOeste << " bilhao(oes) de habitante(s)" << endl;
+    cout << "Setor Leste:\n- " << pLeste << " planeta(s)\n- " << hLeste << " bilhao(oes) de habitante(s)" << endl;
+    cout << "Casualidades: " << causalidades << " planeta(s)" << endl;
     return(0);
 }

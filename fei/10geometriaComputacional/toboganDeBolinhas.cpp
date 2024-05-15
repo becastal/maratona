@@ -1,3 +1,4 @@
+// #include "../../geodeb.h"
 #include <bits/stdc++.h>
 #define f first
 #define s second
@@ -9,9 +10,12 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+#define sq(x) ((x)*(x))
 typedef double ld;
 const ld DINF = 1e18;
+const ld pi = acos(-1.0);
 const ld eps = 1e-9;
+
 
 bool eq(ld a, ld b) {
 	return abs(a - b) <= eps;
@@ -66,37 +70,49 @@ ld disttoseg(pt p, line r) { // distancia do ponto ao seg
 	return disttoline(p, r);
 }
 
-bool isleft(pt p, line r) {
-    return (r.q.x - r.p.x) * (p.y - r.p.y) - (r.q.y - r.p.y) * (p.x - r.p.x) > eps;
-}
-
 int main()
 {
     _;
+    // GD_INIT("_geo.html");
+    
     int n;
-    while (cin >> n && n)
+    while (cin >> n)
     {
-        vector<pt> pts(n);
-        for (auto& p : pts)
-            cin >> p;
+        int l, h; cin >> l >> h;
+        line borda1(pt(0, 0), pt(0, h)), borda2(pt(l, 0), pt(l, h));
+        // GD_SEGMENT(0, 0, 0, h);
+        // GD_SEGMENT(l, 0, l, h);
 
-        ld maior = DINF;
+        vector<line> aletas;
         for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-            {
-                line l; l.p = pts[i], l.q = pts[j];
-                ld sE = 0, sD = 0;
-                for (auto p : pts)
-                {
-                    if (isleft(p, l))
-                       sE += disttoline(p, l); 
-                    else
-                       sD += disttoline(p, l);
-                }
-                maior = min(maior, abs(sE - sD));
-            }
+        {
+            int xi, yi, xf, yf; cin >> yi >> xf >> yf;
+            xi = (i % 2 ? l : 0);
 
-        printf("%.3f\n", maior);
+            line aleta(pt(xi, yi), pt(xf, yf));
+            aletas.push_back(aleta);
+            // GD_SEGMENT(xi, yi, xf, yf, "red");
+        }
+
+        ld menor = DINF;
+        for (int i = 0; i < n; i++)
+        {
+            if (i % 2)
+            {
+                menor = min(menor, disttoseg(aletas[i].q, borda1));
+                // GD_SEGMENT(aletas[i].q.x, aletas[i].q.y, borda1.q.x, aletas[i].q.y, "green");
+            }
+            else
+            {
+                menor = min(menor, disttoseg(aletas[i].q, borda2));
+                // GD_SEGMENT(aletas[i].q.x, aletas[i].q.y, borda2.q.x, aletas[i].q.y, "green");
+            }
+            
+            if (i < n - 1)
+                menor = min(menor, disttoseg(aletas[i].q, aletas[i + 1]));
+        }
+
+        cout << fixed << setprecision(2) << menor << endl;
     }
 
     return(0);

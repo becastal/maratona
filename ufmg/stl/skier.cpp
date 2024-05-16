@@ -11,31 +11,33 @@ using namespace std;
 
 int main()
 {
+    _;
     map<char, pair<int, int>> mov = { {'N', {-1, 0}}, {'S', {1, 0}}, {'W', {0, -1}}, {'E', {0, 1}} };
     int t; cin >> t;
 
     while (t--)
     {
-        set<pair<int, int>> posicoes;
+        set<pair< pair<int, int>, pair<int, int> >> caminhosFeitos;
         pair<int, int> atual = {0, 0};
-        posicoes.insert(atual);
         int tempo = 0;
 
         string movimentos; cin >> movimentos;
         for (auto c : movimentos)
         {
-            atual.f += mov[c].f;
-            atual.s += mov[c].s;
+            pair<int, int> anterior = atual;
+            pair<int, int> posterior = {atual.f + mov[c].f, atual.s + mov[c].s};
 
-            if (!posicoes.count(atual))
+            if (!caminhosFeitos.count({anterior, posterior}))
                 tempo += 5;
             else
                 tempo++;
 
-            posicoes.insert(atual);
+            caminhosFeitos.insert({anterior, posterior});
+            caminhosFeitos.insert({posterior, anterior});
+            atual = posterior;
         }
         cout << tempo << endl;
     }
-    
-    return(0);
+
+    return 0;
 }

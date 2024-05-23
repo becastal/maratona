@@ -9,24 +9,35 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-vector<tuple<char, int, int>> operacoes;
+ll cartas(ll n)
+{
+	ll an = 2 + (n - 1) * 3;
+	return ((2 + an) * n) / 2;
+}
 
 int main()
 {
-    int t; cin >> t;
-    while (t--)
-    {
-        int a, b; cin >> a >> b;
+    _;
 
-        int resto = b % 10;
+	int t; cin >> t;
+	while (t--)
+	{
+		ll c; cin >> c;
 
-        if (resto)
-            swap(a, b);
-        else 
-            resto = a % 10;
+		ll l = 1, r = 1e9 + 10;
+		for (int i = 0; i < 1000; i++)
+		{
+			ll m = (l + r) / 2;
 
-        cout << a - resto << " x " << b << " + " << resto << " x " << b << endl;
-    }
+			if (cartas(m) > c)
+				r = m;
+			else
+				l = m;
+		}
 
+	 	cout << l << endl;
+	}
+	
+    
     return(0);
 }

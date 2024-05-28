@@ -3,8 +3,7 @@
 #include <queue>
 #include <set>
 #include <map>
-#define f first
-#define s second
+#define f first #define s second
 #define _ ios_base::sync_with_stdio(0);cin.tie(0);
 #define endl '\n'
 #define dbg(x) cout << #x << " = " << x << endl
@@ -72,8 +71,7 @@ void printMapaAtual(vector<pair<int, int>> posicoes)
     auto mapaAtual = mapa;
     for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) if (mapa[i][j] >= 'A' && mapa[i][j] <= 'C') mapaAtual[i][j] = '.'; else mapaAtual[i][j] = mapa[i][j];
 
-    cout << endl << "posicao alcancada em [" << distancia[posicoes] << "] movimentos!";
-    for (int i = 0; i < 3; i++)
+    cout << endl << "posicao alcancada em [" << distancia[posicoes] << "] movimentos!"; for (int i = 0; i < 3; i++)
     {
         cout << char(i + 'A') << "{" << posicoes[i].f << ", " << posicoes[i].s << "} ";
         mapaAtual[posicoes[i].f][posicoes[i].s] = i + 'A';

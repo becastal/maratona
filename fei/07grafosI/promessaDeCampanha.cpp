@@ -3,9 +3,7 @@
 #include <map>      
 #include <algorithm>
 #include <utility>  
-
 using namespace std;
-
 vector<vector<int>> grafo;
 vector<bool> visitados;
 

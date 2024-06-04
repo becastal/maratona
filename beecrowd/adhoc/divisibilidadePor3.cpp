@@ -13,22 +13,15 @@ int main()
 {
     _;
 
-	int m, c = 0;
-	while (cin >> m and m)
+	int n;
+	string m;
+	while (cin >> n >> m)
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
+		int num = 0;
+		for (auto c : m)
+			num += c - '0';
 
-		for (int i = 0; i < m; i++)
-		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
-		}
-		cout << endl << endl;
+		cout << num << ' ' << (num % 3 ? "nao" : "sim") << endl;
 	}
     
     return(0);

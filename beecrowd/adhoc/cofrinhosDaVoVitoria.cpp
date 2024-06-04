@@ -13,22 +13,18 @@ int main()
 {
     _;
 
-	int m, c = 0;
-	while (cin >> m and m)
+	int n, t = 0;
+	while (cin >> n and n)
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
-
-		for (int i = 0; i < m; i++)
+		cout << "Teste " << ++t << endl;
+		int diff = 0;
+		while (n--)
 		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
+			int j, z; cin >> j >> z;
+			diff += j - z;
+			cout << diff << endl;
 		}
-		cout << endl << endl;
+		cout << endl;
 	}
     
     return(0);

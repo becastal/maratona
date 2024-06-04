@@ -9,19 +9,25 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+vector<int> meses = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+int solve(int d, int m)
+{
+	int soma = 0;
+	for (int i = 1; i < m; i++)
+		soma += meses[i];
+	soma += d;
+	return soma;
+}
+
 int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	int d1, m1, d2, m2;
+	cin >> d1 >> m1 >> d2 >> m2;
 
-	cout << tot << endl;
+	cout << solve(d2, m2) - solve(d1, m1) << endl;
     
     return(0);
 }

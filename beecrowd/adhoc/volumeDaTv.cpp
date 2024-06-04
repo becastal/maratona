@@ -13,15 +13,18 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
+	int v, t; cin >> v >> t;
+	int a = v;
+
+	for (int i = 0; i < t; i++)
 	{
-		l /= 2;
-		tot *= 4;
+		int ai; cin >> ai;
+		a += ai;
+		if (a < 0) a = 0;
+		if (a > 100) a = 100;
 	}
 
-	cout << tot << endl;
-    
+	cout << a << endl;
+
     return(0);
 }

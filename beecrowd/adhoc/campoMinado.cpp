@@ -13,15 +13,20 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	int n; cin >> n;
+	vector<int> v(n), r(n);
 
-	cout << tot << endl;
+	for (auto& vi : v)
+		cin >> vi;
+
+	for (int i = 1; i < n - 1; i++)
+		r[i] = v[i] + v[i - 1] + v[i + 1];
+
+	r[0] = v[0] + v[1];
+	r[n - 1] = v[n - 1] + v[n - 2];
+
+	for (auto ri : r)
+		cout << ri << endl;
     
     return(0);
 }

@@ -13,15 +13,12 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	vector<double> v(5);
+	for (auto& vi : v)
+		cin >> vi;
 
-	cout << tot << endl;
+	sort(v.begin(), v.end());
+	cout << fixed << setprecision(1) <<  v[1] + v[2] + v[3] << endl;
     
     return(0);
 }

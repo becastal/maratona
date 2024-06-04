@@ -13,23 +13,19 @@ int main()
 {
     _;
 
-	int m, c = 0;
-	while (cin >> m and m)
+	vector<pair<double, int>> v(2, {0.0, 0});
+	for (int i = 0; i < v.size(); i++)
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
+		int n;
+		double d, vi;
+		cin >> n >> d >> vi;
 
-		for (int i = 0; i < m; i++)
-		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
-		}
-		cout << endl << endl;
+		v[i].f = d / vi;
+		v[i].s = n;
 	}
+
+	sort(v.begin(), v.end());
+	cout << v[0].s << endl;
     
     return(0);
 }

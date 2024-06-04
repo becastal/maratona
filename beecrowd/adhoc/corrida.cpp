@@ -12,24 +12,25 @@ using namespace std;
 int main()
 {
     _;
+	
+	int n, m; cin >> n >> m;
+	vector<pair<int, int>> v(n, {0, 0});
 
-	int m, c = 0;
-	while (cin >> m and m)
+	for (int i = 0; i < n; i++)
+		v[i].s = i + 1;
+
+	for (auto& i : v)
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
-
-		for (int i = 0; i < m; i++)
+		for (int j = 0; j < m; j++)
 		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
+			int mi; cin >> mi;
+			i.f += mi;
 		}
-		cout << endl << endl;
 	}
-    
+
+	sort(v.begin(), v.end());
+	for (int i = 0; i < 3; i++)
+		cout << v[i].s << endl;
+
     return(0);
 }

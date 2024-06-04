@@ -9,26 +9,60 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+int n;
+vector<int> id, sz;
+
+struct aresta 
+{
+    int u;
+    int v;
+    int w;
+    bool operator<(const aresta& other) const {
+        return w < other.w;
+    }
+};
+
+int find(int x)
+{
+    return(id[x] = (id[x] == x ? x : find(id[x])));
+}
+
+void unir(int x, int y)
+{
+    x = find(x), y = find(y);
+    if (x == y) return;
+    if (sz[x] > sz[y]) swap(x, y);
+    id[x] = y;
+    sz[y] += sz[x];
+}
+
+int kruskal(vector<aresta>& g)
+{
+    id = vector<int>(n + 1); iota(id.begin(), id.end(), 0);
+    sz = vector<int>(n + 1, 1);
+	sort(g.begin(), g.end());
+    double soma = 0;
+    for (auto a : g)
+        if (find(a.u) != find(a.v))
+        {
+            unir(a.u, a.v);
+            soma += a.w;
+        }
+    return(soma);
+}
+
 int main()
 {
     _;
 
-	vector<vector<char>> t;
-	t.push_back(vector<char>(16));
-	iota(t.back().begin(), t.back().end(), 'A');
-	
-	while (t.back().size() > 1)
-	{
-		vector<char> n(t.back().size() / 2);
-		for (int i = 0; i < n.size(); i++)
-		{
-			int a, b; cin >> a >> b;
-			n[i] = (a > b ? t.back()[i * 2] : t.back()[i * 2 + 1]);
-		}
-		t.push_back(n);
-	}
-	for (int i = 0; i < t.back().size(); i++)
-		cout << t.back()[i] << endl;
-    
+	int n, f, r; cin >> n >> f >> r;
+
+	vector<aresta> as(f + r);
+
+	for (auto& ai : as)
+		cin >> ai.u >> ai.v >> ai.w;
+
+	cout << kruskal(as) << endl;
+
     return(0);
 }

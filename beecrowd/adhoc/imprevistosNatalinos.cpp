@@ -13,15 +13,16 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	double a, c, x, y;
+	cin >> a >> c >> x >> y;
 
-	cout << tot << endl;
+	if (a + 1 <= c - (x + y))
+		cout << "Igor feliz!" << endl;
+	else
+		if (x > y / 2.0)
+			cout << "Caio, a culpa eh sua!" << endl;
+		else
+			cout << "Igor bolado!" << endl;
     
     return(0);
 }

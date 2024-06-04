@@ -13,23 +13,16 @@ int main()
 {
     _;
 
-	int m, c = 0;
-	while (cin >> m and m)
+	int d, i, x, f; cin >> d >> i >> x >> f;
+	int soma = i;
+	for (int j = d + 1; j <= d + f; j++)
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
-
-		for (int i = 0; i < m; i++)
-		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
-		}
-		cout << endl << endl;
+		if (j % 2 != 0)
+			soma -= x;
+		else
+			soma += x;
 	}
+	cout << soma << endl;
     
     return(0);
 }

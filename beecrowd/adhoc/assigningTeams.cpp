@@ -13,15 +13,12 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	vector<int> v(4);
+	for (auto& vi : v)
+		cin >> vi;
 
-	cout << tot << endl;
+	sort(v.begin(), v.end());
+	cout << abs((v[0] + v[3]) - (v[1] + v[2])) << endl; 
     
     return(0);
 }

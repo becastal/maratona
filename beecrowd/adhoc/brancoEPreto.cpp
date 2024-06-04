@@ -13,22 +13,22 @@ int main()
 {
     _;
 
-	int m, c = 0;
-	while (cin >> m and m)
+	string s, t;
+	while (cin >> s >> t and s != "*" and t != "*")
 	{
-		cout << "Instancia " << ++c << endl;
-		vector<char> alf(26);
-		iota(alf.begin(), alf.end(), 'A');
+		vector<int> v(s.size(), 0);
+		
+		for (int i = 0; i < s.size(); i++)
+			if (s[i] != t[i])
+				v[i] = 1;
 
-		for (int i = 0; i < m; i++)
-		{
-			int ai; cin >> ai; ai--;
-			char ch = alf[ai];
-			alf.erase(alf.begin() + ai);
-			alf.insert(alf.begin(), ch);
-			cout << ch;
-		}
-		cout << endl << endl;
+		int c = 0;
+		v.push_back(0);
+		for (int i = 0; i < v.size() - 1; i++)
+			if (v[i] == 1 and v[i + 1] == 0)
+				c++;
+
+		cout << c << endl;
 	}
     
     return(0);

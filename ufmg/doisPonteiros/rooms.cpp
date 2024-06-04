@@ -13,15 +13,24 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	int n; cin >> n;
 
-	cout << tot << endl;
+	vector<int> v(n, 0);
+	int l = 1;
+	for (int i = 1; i <= n; i++)
+	{
+		int x; cin >> x;
+		if (x < 0)
+			x = abs(x), v[x] = i;
+		else
+			if (v[x] != 0)
+			{
+				while (l <= v[x])
+					cout << i - l++ << ' ';
+				v[x] = 0;
+			}
+	}
+	while (l <= n) cout << n + 1 - l++ << ' ';
     
     return(0);
 }

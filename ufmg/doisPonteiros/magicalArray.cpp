@@ -13,15 +13,25 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+    int n; cin >> n;
+    vector<ll> v(n);
 
-	cout << tot << endl;
+    for (ll &ai : v)
+        cin >> ai;
+
+    ll c = 0;
+    for (int l = 0; l < n; ++l)
+    {
+        ll r = l;
+        while (r < n && v[r] == v[l])
+            ++r;
+        ll len = r - l;
+        c += len * (len + 1) / 2;
+        l = r - 1;
+    }
+
+    cout << c << endl;
     
     return(0);
 }
+

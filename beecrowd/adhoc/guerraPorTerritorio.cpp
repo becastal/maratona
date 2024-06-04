@@ -13,15 +13,22 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
+	int n; cin >> n;
+	vector<int> v(n);
+	for (auto& vi : v)
+		cin >> vi;
+
+	int l = 0, r = n - 1;
+	int sl = v[l], sr = v[r];
+	while (l != r - 1)
 	{
-		l /= 2;
-		tot *= 4;
+		if (sl <= sr)
+			sl += v[++l];
+		else
+			sr += v[--r];
 	}
 
-	cout << tot << endl;
+	cout << l + 1 << endl;
     
     return(0);
 }

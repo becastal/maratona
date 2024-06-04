@@ -13,15 +13,16 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	double o, b, c; cin >> o >> b >> c;
 
-	cout << tot << endl;
-    
+	if (o < b and o < c)
+		cout << "Otavio" << endl;
+	else if (b < o and b < c)
+		cout << "Bruno" << endl;
+	else if (c < o and c < b)
+		cout << "Ian" << endl;
+	else
+		cout << "Empate" << endl;
+
     return(0);
 }

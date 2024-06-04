@@ -13,15 +13,13 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	int a, b, c, d;
+	cin >> a >> b >> c >> d;
 
-	cout << tot << endl;
+	int den = b * d;
+	int num = den / b * a + den / d * c;
+
+	cout << num / gcd(den, num) << ' ' << den / gcd(den, num) << endl;
     
     return(0);
 }

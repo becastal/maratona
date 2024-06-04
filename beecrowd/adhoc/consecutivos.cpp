@@ -13,15 +13,21 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
+	int n; cin >> n;
+	vector<int> v(n);
+	for (auto& vi : v)
+		cin >> vi;
+
+	int l = 0, maior = -INF;
+	for (int r = 0; r < n; r++)
+	{	
+		while (v[l] != v[r])
+			l++;
+		
+		maior = max(maior, r - l + 1);
 	}
 
-	cout << tot << endl;
+	cout << maior << endl;
     
     return(0);
 }

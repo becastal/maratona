@@ -13,15 +13,25 @@ int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
+	ll n, s; cin >> n >> s;
+	vector<ll> v(n);
+	
+	for (auto& vi: v)
+		cin >> vi;
+
+	ll soma = 0, l = 0, melhor = n + 1;
+	for (int r = 0; r < n; r++)
 	{
-		l /= 2;
-		tot *= 4;
+		soma += v[r];
+		if (soma < s) continue; // r++
+		
+		while (soma >= s)
+			soma -= v[l++];
+	
+		melhor = min(melhor, r - l + 2);
 	}
 
-	cout << tot << endl;
+	cout << (melhor > n ? -1 : melhor) << endl;
     
     return(0);
 }

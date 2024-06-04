@@ -9,19 +9,31 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+bool ehprimo(int n)
+{
+	for (int i = 2; i * i <= n; i++)
+		if (n % i == 0)
+			return false;
+
+	return true;
+}
+
 int main()
 {
     _;
 
-	double l; cin >> l;
-	int tot = 1;
-	while (l >= 2.0)
-	{
-		l /= 2;
-		tot *= 4;
-	}
+	int n, m;
+	cin >> n >> m;
 
-	cout << tot << endl;
+	int p1 = n;
+	while (!ehprimo(p1))
+		p1--;
+
+	int p2 = m;
+	while (!ehprimo(p2))
+		p2--;
+
+	cout << p1 * p2 << endl;
     
     return(0);
 }

@@ -9,25 +9,29 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-bool primo(int x)
-{
-	for (int i = 2; i * i <= x; i++)
-		if (x % i == 0)
-			return false;
-	return true;
-}
-
 int main()
 {
     _;
-	int c = 0;
 
-	int t; cin >> t;
-	while (t--)
+	string cpf;
+	while (cin >> cpf)
 	{
-		int n; cin >> n; n++;
-		cout << (n % 7 == 0 and n % 2 == 1 and primo(n + 2) ? "Yes" : "No") << endl;
-	}
+		int d1 = 0, d2 = 0;
+		for (int i = 0; i < 9; i++)
+		{
+			char c = cpf[i];
+			cout << c;
+			if ((i + 1) % 3 == 0 and i < 8)
+				cout << '.';
 
+			d1 += (c - '0') * (i + 1);
+			d2 += (c - '0') * (9 - i);	
+		}
+
+		cout << '-';
+		cout <<  d1 % 11 % 10;
+		cout <<  d2 % 11 % 10 << endl;
+	}
+    
     return(0);
 }

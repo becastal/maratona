@@ -12,6 +12,21 @@ using namespace std;
 int main()
 {
     _;
+
+	int n, m;
+	while (cin >> n >> m and n and m)
+	{
+		vector<int> v(n, 0);
+		int c = 0;
+		for (int i = 0; i < m; i++)
+		{
+			int vi; cin >> vi; vi--;
+			if (v[vi] == 1)
+				c++;
+			v[vi]++;
+		}
+		cout << c << endl;
+	}
     
     return(0);
 }

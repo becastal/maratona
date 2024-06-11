@@ -9,25 +9,33 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-bool primo(int x)
-{
-	for (int i = 2; i * i <= x; i++)
-		if (x % i == 0)
-			return false;
-	return true;
-}
-
 int main()
 {
     _;
-	int c = 0;
 
-	int t; cin >> t;
-	while (t--)
+	int n;
+	while (cin >> n)
 	{
-		int n; cin >> n; n++;
-		cout << (n % 7 == 0 and n % 2 == 1 and primo(n + 2) ? "Yes" : "No") << endl;
-	}
+		int s = 0;
+		vector<int> v(n);
+		for (auto& vi : v)
+		{
+			cin >> vi;
+			s += vi;
+		}
 
+		int m = s / n, r = 0;
+		for (auto vi : v)
+			r += abs(m - vi);
+
+		r /= 2;
+		r++;
+
+		if (s % m != 0)
+			r = -1;
+
+		cout << r << endl;
+	}
+    
     return(0);
 }

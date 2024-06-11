@@ -9,25 +9,32 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-bool primo(int x)
+bool digunicos(int i)
 {
-	for (int i = 2; i * i <= x; i++)
-		if (x % i == 0)
+	vector<int> v(10);
+	string s = to_string(i);
+	for (auto c : s)
+	{
+		if (v[c - '0'])
 			return false;
+		v[c - '0']++;
+	}
 	return true;
 }
 
 int main()
 {
     _;
-	int c = 0;
 
-	int t; cin >> t;
-	while (t--)
+	int n, m;
+	while (cin >> n >> m)
 	{
-		int n; cin >> n; n++;
-		cout << (n % 7 == 0 and n % 2 == 1 and primo(n + 2) ? "Yes" : "No") << endl;
+		int c = 0;
+		for (int i = n; i <= m; i++)
+			if (digunicos(i))
+				c++;
+		cout << c << endl;
 	}
-
+    
     return(0);
 }

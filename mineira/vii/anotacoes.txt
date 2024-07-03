@@ -1,0 +1,14 @@
+maratona mineira vii (2018)
+a: [0] teoria dos numeros ou alguma matematica bizarra.
+b: [1] sabiamos. problemas na implementacao. grafo e dp. nada demais.
+c: [2] adhoc. suave.
+d: [2] adhoc. suave.
+e: [2] segtree. chamei na experiencia.
+f: [0] dp dificil talvez. nao sei direito.
+g: [2] nao li. albertini disse que era suave.
+h: [0] dp dificil talvez tambem. 
+i: [1] acho que sabia. um pouco de grafo.
+j: [2] adhoc. suave.
+k: [1] sabiamos. grafo tambem. alguns problemas pra implementar.
+
+total: 5 feitas, 3 no talvez e 3 que nao fariamos nem com +1dia no relogio.

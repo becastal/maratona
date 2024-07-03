@@ -12,6 +12,33 @@ using namespace std;
 int main()
 {
     _;
-    // dica: pesquisar sobre "ordered statistic set"
+	int n, k; cin >> n >> k;
+
+	vector<string> v(n);
+	set<string> cartas;
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> v[i];
+		cartas.insert(v[i]);
+	}
+
+	int res = 0;
+	for (int i = 0; i < n; i++)
+		for (int j = i + 1; j < n; j++)
+		{
+			string ult = "";
+			for (int l = 0; l < k; l++)
+			{
+				if (v[i][l] == v[j][l]) ult.push_back(v[j][l]);
+				else if (v[i][l] != 'S' and v[j][l] != 'S') ult.push_back('S');
+				else if (v[i][l] != 'E' and v[j][l] != 'E') ult.push_back('E');
+				else ult.push_back('T');
+			}
+			res += cartas.count(ult);	
+		}
+
+	cout << res / 3 << endl;
+    
     return(0);
 }

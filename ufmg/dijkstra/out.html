@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://lukakalinovcic.github.io/geodeb/main.js"></script>
+</head>
+<body>
+  <div id="rootElement"></div>
+</body>
+<script type="text/javascript">
+resourcePath = 'https://lukakalinovcic.github.io/geodeb/';
+jsonData = 
+{
+  "source_code": [
+    "#include <bits/stdc++.h>\u000a",
+    "#include \u0022../../geodeb.h\u0022\u000a",
+    "#define f first\u000a",
+    "#define s second\u000a",
+    "#define _ ios_base::sync_with_stdio(0);cin.tie(0);\u000a",
+    "#define endl '\u005cn'\u000a",
+    "#define dbg(x) cout << #x << \u0022 = \u0022 << x << endl\u000a",
+    "typedef long long ll;\u000a",
+    "const int INF = 0x3f3f3f3f;\u000a",
+    "const ll LINF = 0x3f3f3f3f3f3f3f3fll;\u000a",
+    "using namespace std;\u000a",
+    "typedef vector<vector<pair<int, int>>> grafo;\u000a",
+    "typedef pair<int, int> ii;\u000a",
+    "\u000a",
+    "int n, m;\u000a",
+    "\u000a",
+    "int dijkstra(grafo& g)\u000a",
+    "{\u000a",
+    "\u0009priority_queue<ii> pq;\u000a",
+    "\u0009vector<int> dist(m + 2, INF);\u000a",
+    "\u0009pq.push({0, m});\u000a",
+    "\u0009dist[m] = 0;\u000a",
+    "\u000a",
+    "\u0009while (!pq.empty())\u000a",
+    "\u0009{\u000a",
+    "\u0009\u0009int w = -pq.top().f;\u000a",
+    "\u0009\u0009int u = pq.top().s;\u000a",
+    "\u0009\u0009pq.pop();\u000a",
+    "\u0009\u0009if (dist[u] < w)\u000a",
+    "\u0009\u0009\u0009continue;\u000a",
+    "\u000a",
+    "\u0009\u0009for (auto [v, wv] : g[u])\u000a",
+    "\u0009\u0009\u0009if(dist[v] > w + wv)\u000a",
+    "\u0009\u0009\u0009{\u000a",
+    "\u0009\u0009\u0009\u0009dist[v] = w + wv;\u000a",
+    "\u0009\u0009\u0009\u0009pq.push({-dist[v], v});\u000a",
+    "\u0009\u0009\u0009}\u000a",
+    "\u0009}\u000a",
+    "\u0009return dist[m + 1];\u000a",
+    "}\u000a",
+    "\u000a",
+    "int main()\u000a",
+    "{\u000a",
+    "    _;\u000a",
+    "\u0009GD_INIT(\u0022out.html\u0022);\u000a",
+    "\u000a",
+    "\u0009cin >> n >> m;\u000a",
+    "\u0009ii pi, pf;\u000a",
+    "\u0009cin >> pi.f >> pi.s >> pf.f >> pf.s;\u000a",
+    "\u0009GD_POINT(pi.f, pi.s, \u0022blue\u0022);\u000a",
+    "\u0009GD_POINT(pf.f, pf.s, \u0022red\u0022);\u000a",
+    "\u000a",
+    "\u0009vector<ii> p(m);\u000a",
+    "\u0009for (auto& i : p)\u000a",
+    "\u0009{\u000a",
+    "\u0009\u0009cin >> i.f >> i.s;\u000a",
+    "\u0009\u0009GD_POINT(i.f, i.s);\u000a",
+    "\u0009}\u000a",
+    "\u0009\u0009\u000a",
+    "\u0009sort(p.begin(), p.end());\u000a",
+    "\u0009grafo g(m + 2);\u000a",
+    "\u0009for (int i = 0; i < m; i++)\u000a",
+    "\u0009{\u000a",
+    "\u0009\u0009g[m].push_back({i, min(abs(pi.f - p[i].f), abs(pi.s - p[i].s))});\u000a",
+    "\u0009\u0009g[i].push_back({m, abs(pi.f - p[i].f) + abs(pi.s - p[i].s)});\u000a",
+    "\u000a",
+    "\u0009\u0009g[m + 1].push_back({i, min(abs(pf.f - p[i].f), abs(pf.s - p[i].s))});\u000a",
+    "\u0009\u0009g[i].push_back({m + 1, abs(pf.f - p[i].f) + abs(pf.s - p[i].s)});\u000a",
+    "\u000a",
+    "\u0009\u0009for (int j = i + 1; j < m; j++)\u000a",
+    "\u0009\u0009{\u000a",
+    "\u0009\u0009\u0009int di = min(abs(p[j].f - p[i].f), abs(p[j].s - p[i].s));\u000a",
+    "\u0009\u0009\u0009g[i].push_back({j, di});\u000a",
+    "\u0009\u0009\u0009g[j].push_back({i, di});\u000a",
+    "\u0009\u0009}\u000a",
+    "\u0009}\u000a",
+    "\u000a",
+    "\u0009//for (int i = 0; i < m; i++)\u000a",
+    "\u0009//\u0009for (auto vi : g[m])\u000a",
+    "\u0009//\u0009{\u000a",
+    "\u0009//\u0009\u0009// printf(\u0022{%d, {%d, %d}}\u005cn\u0022, i, vi.f, vi.s);\u000a",
+    "\u0009//\u0009\u0009printf(\u0022%d %d %d\u005cn\u0022, i, vi.f, vi.s);\u000a",
+    "\u0009//\u0009}\u000a",
+    "\u000a",
+    "\u0009cout << dijkstra(g) << endl;\u000a",
+    "\u000a",
+    "    return(0);\u000a",
+    "}\u000a"
+  ],
+  "root": {
+    "type": "begin",
+    "line": 45,
+    "children": [
+      {
+        "type": "point",
+        "line": 50,
+        "x": 1.000000,
+        "y": 1.000000,
+        "attr": "blue"
+      },
+      {
+        "type": "point",
+        "line": 51,
+        "x": 5.000000,
+        "y": 5.000000,
+        "attr": "red"
+      },
+      {
+        "type": "point",
+        "line": 57,
+        "x": 1.000000,
+        "y": 2.000000
+      },
+      {
+        "type": "point",
+        "line": 57,
+        "x": 4.000000,
+        "y": 1.000000
+      },
+      {
+        "type": "point",
+        "line": 57,
+        "x": 3.000000,
+        "y": 3.000000
+      }
+    ]
+  },
+  "theme": "light"
+};
+init(resourcePath);
+</script>
+</html>

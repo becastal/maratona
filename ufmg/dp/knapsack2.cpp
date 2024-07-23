@@ -9,32 +9,33 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-int n, w;
-vector<int> p, v;
-ll memo[100][100010];
-
-ll dp(int i, int j)
-{
-	if (j < 0) return -INF;
-	if (i == n) return 0;
-	ll& at = memo[i][j];
-
-	if (at != -1) return at;
-	return at = max(dp(i + 1, j), dp(i + 1, j - p[i]) + v[i]);
-}
-
 int main()
 {
     _;
 
+	int n, w;
     cin >> n >> w;
-	p.resize(n), v.resize(n);
-	memset(memo, -1, sizeof(memo));
+	vector<int> p(n), v(n);
 
+	ll soma = 0;
 	for (int i = 0; i < n; i++)
+	{
 		cin >> p[i] >> v[i];
+		soma += v[i];
+	}
 
-	cout << dp(0, w) << endl;
+	vector<ll> dp(soma + 1, INF);
+	dp[0] = 0;
+	for (int i = 0; i < n; i++)
+		for (int agr = soma - v[i]; agr >= 0; agr--)
+			dp[agr + v[i]] = min(dp[agr + v[i]], dp[agr] + p[i]);		
+
+	ll res = 0;
+	for (int i = 0; i <= soma; i++)
+		if (dp[i] <= w)
+			res = max(res, (ll) i);
+
+	cout << res << endl;
 
     return(0);
 }

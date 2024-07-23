@@ -1,0 +1,5 @@
+set ts=4 sw=4 mouse=a number ai si undofile
+syntax on
+command! Comgeo execute ':%s/#include "\.\.\/\.\.\/geodeb.h"/\/\/ &/g' | execute ':%s/GD_/\/\/ &/g'
+command! Dcomgeo execute ':%s/\/\/ #include "\.\.\/\.\.\/geodeb.h"/#include "\.\.\/\.\.\/geodeb.h"/g' | execute ':%s/\/\/ GD_/GD_/g'
+

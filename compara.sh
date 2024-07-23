@@ -1,5 +1,5 @@
-for ((i=1; i<=67; i++)); do
-    if ! diff <(./a.out < "_comp/K_$i.in") "_comp/K_$i.sol" >/dev/null; then
+for ((i=1; i<=36; i++)); do
+    if ! diff <(./a.out < "input/J_$i") "output/J_$i" >/dev/null; then
         echo "diferenca em $i"
     fi
 done

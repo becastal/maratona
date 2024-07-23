@@ -9,32 +9,30 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-int n, w;
-vector<int> p, v;
-ll memo[100][100010];
-
-ll dp(int i, int j)
-{
-	if (j < 0) return -INF;
-	if (i == n) return 0;
-	ll& at = memo[i][j];
-
-	if (at != -1) return at;
-	return at = max(dp(i + 1, j), dp(i + 1, j - p[i]) + v[i]);
-}
-
 int main()
 {
     _;
 
-    cin >> n >> w;
-	p.resize(n), v.resize(n);
-	memset(memo, -1, sizeof(memo));
+	int n, w;
+	cin >> n >> w;
+	vector<int> peso(n), valor(n);
 
 	for (int i = 0; i < n; i++)
-		cin >> p[i] >> v[i];
+		cin >> peso[i] >> valor[i];
 
-	cout << dp(0, w) << endl;
+	vector<ll> dp(w + 1, 0);
+	// dp[i] -> maximo de valor que consigo com peso i;
 
+	for (int i = 0; i < n; i++)
+		for (int agr = w - peso[i]; agr >= 0; agr--)
+			dp[agr + peso[i]] = max(dp[agr + peso[i]], dp[agr] + valor[i]);
+			// itera por todos os possiveis pesos de ter pego ou nao o item i e adiciona o valor caso seja melhor
+
+	ll res = 0;
+	for (int i = 0; i <= w; i++)
+		res = max(res, dp[i]);
+
+	cout << res << endl;
+    
     return(0);
 }

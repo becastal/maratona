@@ -11,7 +11,6 @@ using namespace std;
 
 const int mod = 1e9 + 7;
 
-
 int main()
 {
     _;
@@ -19,7 +18,6 @@ int main()
 	int h, w; cin >> h >> w;
 	vector<vector<char>> mp(h, vector<char>(w));
 	vector<vector<int>> dp(h, vector<int>(w));
-
 	for (auto& l : mp)
 		for (auto& c : l)
 			cin >> c;

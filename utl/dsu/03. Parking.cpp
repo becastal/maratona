@@ -21,8 +21,7 @@ struct UF {
 
 	void merge(int i, int j) {
 		if ((i = find(i)) == (j = find(j))) return;
-		if (sz[i] < sz[j]) swap(i, j);
-		sz[i] += sz[j], id[j] = i;
+		id[i] = j;
 	}
 };
 
@@ -30,31 +29,18 @@ int main()
 {
     _;
 
-	int n, m, k; cin >> n >> m >> k;
+	int n; cin >> n;
 	UF dsu(n);
-	
-	for (int i = 0, u, v; i < m; i++) {
-		cin >> u >> v; u--, v--;
-	}
+	vector<int> v(n);
+	for (int& i : v) cin >> i, i--;
 
-	vector<tuple<string, int, int>> q(k);
-	for (auto& [qi, u, v] : q) {
-		cin >> qi >> u >> v; u--, v--;
+	for (int i : v) {
+		i = dsu.find(i);
+		cout << i + 1 << ' ';		
+		int prox = (i + 1 < n ? i + 1 : 0);
+		dsu.merge(i, prox);
 	}
-	reverse(q.begin(), q.end());
-	
-	vector<string> res;
-	for (auto [qi, u, v] : q) {
-		if (qi == "ask") {
-			res.push_back(dsu.find(u) == dsu.find(v) ? "YES" : "NO");
-		} else {
-			dsu.merge(u, v);
-		}
-	}
-	reverse(res.begin(), res.end());
-	
-	for (auto ri : res)
-		cout << ri << endl;
+	cout << endl;
     
     return(0);
 }

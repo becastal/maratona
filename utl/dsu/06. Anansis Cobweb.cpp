@@ -10,9 +10,11 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
 struct UF {
+	int c;
 	vector<int> id, sz;
 	UF(int n) : id(n), sz(n, 1) {
 		iota(id.begin(), id.end(), 0);
+		c = n;
 	}
 
 	int find(int i) {
@@ -23,6 +25,7 @@ struct UF {
 		if ((i = find(i)) == (j = find(j))) return;
 		if (sz[i] < sz[j]) swap(i, j);
 		sz[i] += sz[j], id[j] = i;
+		c--;
 	}
 };
 
@@ -30,31 +33,38 @@ int main()
 {
     _;
 
-	int n, m, k; cin >> n >> m >> k;
+	int n, m; cin >> n >> m;
 	UF dsu(n);
-	
-	for (int i = 0, u, v; i < m; i++) {
+
+	vector<pair<int, int>> arestas(m);
+	for (auto& [u, v] : arestas) {
 		cin >> u >> v; u--, v--;
 	}
 
-	vector<tuple<string, int, int>> q(k);
-	for (auto& [qi, u, v] : q) {
-		cin >> qi >> u >> v; u--, v--;
+	int q; cin >> q;	
+	vector<int> corta(m, 0), ordem(q), res;
+	for (auto& i : ordem) {
+		cin >> i; i--;
+		corta[i] = 1;	
 	}
-	reverse(q.begin(), q.end());
-	
-	vector<string> res;
-	for (auto [qi, u, v] : q) {
-		if (qi == "ask") {
-			res.push_back(dsu.find(u) == dsu.find(v) ? "YES" : "NO");
-		} else {
-			dsu.merge(u, v);
+
+	for (int i = 0; i < m; i++) {
+		if (!corta[i]) {
+			dsu.merge(arestas[i].f, arestas[i].s);
 		}
 	}
-	reverse(res.begin(), res.end());
+	reverse(ordem.begin(), ordem.end());
 	
-	for (auto ri : res)
-		cout << ri << endl;
+	for (int i : ordem) {
+		res.push_back(dsu.c);
+		dsu.merge(arestas[i].f, arestas[i].s);
+	}
+	reverse(res.begin(), res.end());
+
+	for (int i : res) {
+		cout << i << ' ';
+	}
+	cout << endl;
     
     return(0);
 }

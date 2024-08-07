@@ -29,6 +29,8 @@ int main()
 
 	mao = v[0];
 	for (int i = 0; i < n; i++)
+		// agora eu tenho a minha mao e tenho que, a cada mao, achar o maior xor possivel.
+		// da pra fazer com true;
     
     return(0);
 }

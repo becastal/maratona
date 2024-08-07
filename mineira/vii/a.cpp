@@ -9,7 +9,7 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-ll digitos(ll x)
+int digitos(ll x)
 {
 	int r = 0;
 	while (x > 0)
@@ -25,7 +25,7 @@ int main()
     _;
 
 	ll n, m, u;
-	scanf("%lld%lld", &n, &m);
+	cin >> n >> m;
 
 	set<ll> pq;
 	pq.insert(n);
@@ -44,7 +44,7 @@ int main()
 			pq.insert(i * pow(10, dig) + u);
 	}
 
-	printf("%lld\n", u);
+	cout << u << endl;
     
     return(0);
 }

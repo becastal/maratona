@@ -3,9 +3,9 @@
 // find: o(1/ackermann(n));
 // merge: o(1/ackermann(n)), praticamente o(1);
 
-struct UF {
+struct DSU {
 	vector<int> id, sz;
-	UF(int n) : id(n), sz(n, 1) {
+	DSU(int n) : id(n), sz(n, 1) {
 		iota(id.begin(), id.end(), 0);
 	}
 

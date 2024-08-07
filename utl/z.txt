@@ -1,0 +1,12 @@
+ordem a seguir:
+
+[ ] orderedset
+[ ] gp hash table
+[ ] bst
+[ ] bit
+[ ] sparse
+[ ] trie
+[ ] dsu++
+[ ] sqrt decomposition
+
+so as estreladas, a nao ser que esteja maneiro

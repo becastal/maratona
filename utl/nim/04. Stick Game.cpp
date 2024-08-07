@@ -13,17 +13,22 @@ int main()
 {
     _;
 
-	int n; cin >> n; cin.ignore();
-	while (n--) {
-		string f; getline(cin, f);
-		stringstream ss;
-		ss << f;
-
-		string s;
-		while (ss >> s) {
-			cont++;
+	int n, k; cin >> n >> k;
+	vector<int> v(k);
+	for (int& i : v) cin >> i;
+	
+	vector<int> dp(n + 1, 0);
+	for (int i = 0; i <= n; i++) {
+		for (int j : v) {
+			if (i - j < 0) continue;
+			if (!dp[i - j]) dp[i] = 1;
 		}
 	}
+
+	for (int i = 1; i <= n; i++) {
+		cout << (dp[i] ? 'W' : 'L');
+	}
+	cout << endl;
     
     return(0);
 }

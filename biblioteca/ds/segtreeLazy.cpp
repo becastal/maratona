@@ -11,14 +11,17 @@
 
 namespace seg {
 	ll seg[4*MAX], lazy[4*MAX];
-	vector<int> v;
-	int n;
+	int n, *v;
 
 	ll build(int p=1, int l=0, int r=n-1) {
 		lazy[p] = 0;
 		if (l == r) return seg[p] = v[l];
 		int m = (l+r)/2;
 		return seg[p] = build(2*p, l, m) + build(2*p+1, m+1, r);
+	}
+	void build(int n2, int* v2) {
+		n = n2, v = v2;
+		build();
 	}
 	void prop(int p, int l, int r) {
 		seg[p] += lazy[p]*(r-l+1);
@@ -45,7 +48,6 @@ namespace seg {
 			update(a, b, x, 2*p+1, m+1, r);
 	}
 };
-
 
 // em uma seg de max, acha primeiro i que v[i] >= val;
 int get_left(int a, int b, int val, int p=1, int l=0, int r=n-1) {

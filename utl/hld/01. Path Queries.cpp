@@ -9,7 +9,7 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-const int MAX = 5e3 + 10;
+const int MAX = 2e5 + 10;
 
 namespace seg {
 	ll seg[4*MAX], lazy[4*MAX];
@@ -52,7 +52,7 @@ namespace seg {
 };
 
 namespace hld {
-	vector<vector<int>> g;
+	vector<int> g[MAX];
 	int pos[MAX], sz[MAX];
 	int peso[MAX], pai[MAX];
 	int h[MAX], v[MAX], t;
@@ -85,53 +85,43 @@ namespace hld {
 		if (h[a] == h[b]) return (void)seg::update(pos[b], pos[a], x);
 		seg::update(pos[h[a]], pos[a], x); update_path(pai[h[a]], b, x);
 	}
-}
+	ll query_subtree(int a) {
+		return seg::query(pos[a], pos[a]+sz[a]-1);
+	}
+	void update_subtree(int a, int x) {
+		seg::update(pos[a], pos[a]+sz[a]-1, x);
+	}
+	int lca(int a, int b) {
+		if (pos[a] < pos[b]) swap(a, b);
+		return h[a] == h[b] ? b : lca(pai[h[a]], b);
+	}
+};
 
 int main()
 {
     _;
 
-	int n, d; cin >> n >> d;
-	vector<vector<int>> g(n);
-	for (int i = 0, a, b; i < n - 1; i++) {
-		cin >> a >> b; a--, b--;
-		g[a].push_back(b);
-		g[b].push_back(a);
+	int n, q; cin >> n >> q;
+	for (int i = 0; i < n; i++) {
+		cin >> hld::v[i];
 	}
-
-	int m; cin >> m;
-	vector<pair<int, int>> c(n, {INF, -INF}); // .f: preco da casa, .s: agua que a casa te da;
-	for (int i = 0, ci, vi; i < m; i++) {
-		cin >> ci >> vi; ci--;
-		c[ci].f = vi;
+	for (int i = 0, u, v; i < n - 1; i++) {
+		cin >> u >> v; u--, v--;	
+		hld::g[u].push_back(v);
+		hld::g[v].push_back(u);
 	}
-
-	// 'passa' os caminhoes pipas pelos caminhos.
-	// o(q n logn)
-	int q; cin >> q;
-	hld::g = g;
 	hld::build();
-	for (int i = 0, xi, yi, li; i < q; i++) {
-		cin >> xi >> yi >> li; xi--, yi--;
-		hld::update_path(xi, yi, li);
-	}
-
-	// atualiza os valores finais de cada posicao.
-	// o(n logn)
-	for (int i = 0; i < n; i++) {
-		c[i].s = hld::query_path(i, i);	
-	}
-
-	// agora so knapsack em c com peso d;
-	// o(n d)
-	vector<ll> dp(d + 1, 0);
-	for (int i = 0; i < n; i++) {
-		for (int j = d - c[i].f; j >= 0; j--) {
-			dp[j + c[i].f] = max(dp[j + c[i].f], dp[j] + c[i].s);
+	
+	while (q--) {
+		int qi; cin >> qi;
+		if (qi == 1) {
+			int s, x; cin >> s >> x; s--;	
+			hld::update_path(s, s, x);
+		} else {
+			int s; cin >> s; s--;
+			cout << hld::query_path(0, s) << endl;
 		}
 	}
-
-	cout << *max_element(dp.begin(), dp.end()) << endl;
     
     return(0);
 }

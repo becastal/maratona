@@ -9,6 +9,7 @@
 // query: o(logn), soma de [a, b];
 // update: o(logn), soma x em [a, b];
 
+
 namespace seg {
 	ll seg[4*MAX], lazy[4*MAX];
 	int n, *v;

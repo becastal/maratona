@@ -1,8 +1,13 @@
-// aritmetica modular
-// 
-// da pra usar o mint como se fosse um int normal
-//
-// tudo o(1) menos / e pow que eh alguma coisa esquisita
+/*
+aritmetica modular
+
+descricao:
+	da pra usar mint como se fosse int normal
+
+complexidades:
+	tudo o(1) menos '/' e pow que eh alguma coisa
+	esquisita
+*/
 
 template<int mod>
 struct modInt {

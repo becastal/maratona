@@ -1,14 +1,14 @@
 /*
-	binary indexed tree 2d (fenwick)
+binary indexed tree 2d (fenwick)
 
-	descricao:
-		serve pra queries associativas agora com uma dimensao a mais
-		
-	complexidades:
-		memoria: o(n^2);
-		build:  o(n^2log^2n);
-		query:  o(log^2n), soma do retangulo entre p(x2, y2) e p(x1, y1);
-		update: o(log^2n), soma x em i;
+descricao:
+	serve pra queries associativas agora com uma dimensao a mais
+	
+complexidades:
+	memoria: o(n^2);
+	build:  o(n^2log^2n);
+	query:  o(log^2n), soma retangulo p(x2, y2), p(x1, y1);
+	update: o(log^2n), soma x em i;
 */
 
 namespace bit2d {

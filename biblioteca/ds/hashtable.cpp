@@ -1,3 +1,11 @@
+/* 
+hash-table dopada
+
+descricao:
+	basicamente a mesma coisa do unordered_set padrao
+	mas com uma funcao hash melhor pra minimizar colisoes
+	e quase garantir os o(1) que a hash table promete.
+*/
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;

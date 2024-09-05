@@ -1,7 +1,20 @@
-// dsu - union find;
-// 
-// find: o(1/ackermann(n));
-// merge: o(1/ackermann(n)), praticamente o(1);
+/*
+union find	
+
+descricao:
+	representa e mantem um conjunto. merge tem small
+	to large e find tem compressao de caminho. nem
+	sempre eh necessario, mas com essas duas a
+	complexidade eh a melhor possivel.  tirar id[i]=
+	do find nao precisar de compressao e tirar o que
+	for relacionado com sz no merge se nao precisar
+	de small to large.
+
+complexidades:
+	memoria: o(n);
+	find: o(1/ackermann(n));
+	merge: o(1/ackermann(n)) ~ 1;
+*/
 
 struct DSU {
 	vector<int> id, sz;

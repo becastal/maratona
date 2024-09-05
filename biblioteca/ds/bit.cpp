@@ -1,14 +1,14 @@
 /*
-	binary indexed tree (fenwick)
+binary indexed tree (fenwick)
 
-	descricao:
-		serve pra queries associativas em range [0, r];
-		
-	complexidades:
-		memoria: o(n);
-		build:  o(n);
-		query:  o(logn), soma de [l, r]
-		update: o(logn), soma x em i
+descricao:
+	serve pra queries associativas em range [0, r];
+	
+complexidades:
+	memoria: o(n);
+	build:  o(n);
+	query:  o(logn), soma de [l, r]
+	update: o(logn), soma x em i
 */
 
 namespace bit {

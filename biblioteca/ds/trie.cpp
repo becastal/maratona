@@ -1,12 +1,19 @@
-// Trie
-//
-// trie T() constroi uma trie para o alfabeto das letras minusculas
-// trie T(tamanho do alfabeto, menor caracter) tambem pode ser usado
-// 
-// T.insert(s) - O(|s|*sigma)
-// T.erase(s) - O(|s|)
-// T.find(s) retorna a posicao, -1 se nao achar - O(|s|)
-// T.count_pref(s) numero de strings que possuem s como prefixo - O(|s|)
+/* 
+trie
+
+descricao:
+	arvore que mantem um dicionario.
+	TRIE t() constroi uma trie proa alfabeto das
+	letras minustulas. t(tamanho do alfabeto, menor c)
+	tambem pode ser usado.
+
+complexidades:
+	memoria: o(n|s|);
+	insert: o(|s|*sigma)
+	erase: o(|s|)
+	find: o(|s|) retorna a posicao, -1 se nao achar
+	count_pref: o(|s|) numero de strings s eh prefixo
+*/
 
 struct TRIE {
 	vector<vector<int>> to;

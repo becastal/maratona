@@ -1,9 +1,15 @@
-// sparse-table
-// 
-// remsume intervalos com uma manha parecida com do BIT
-// 
-// build: o(nlogn);
-// query: o(1), min de [a, b];
+/*
+sparse-table
+
+descricao:
+	resume intervalos com uma manha de bits
+	bem parecida com a Fenwick.
+
+complexidades:
+	memoria: o(n);
+	build: o(nlogn);
+	query: o(1), min de [a, b];
+*/
 
 namespace sparse {
     int t[MAX][18], v[MAX];

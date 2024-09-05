@@ -1,13 +1,20 @@
-// segtree com lazy propagation
-// 
-// mesma coisa da com point update, mas essa permite update em um range.
-// o lazy eh porque ele so da update quando precisa, stackando os updates anteriores.
-// portanto, o que ta no lazy tem que ser associativo tambem.
-//
-// build: o(n);
-// prop: o(1), atualiza valores do nodo;
-// query: o(logn), soma de [a, b];
-// update: o(logn), soma x em [a, b];
+/*
+segtree com lazy propagation
+
+descricao:
+	mesma coisa da com point upd, mas essa permite
+	update em range. 'lazy' eh porque ela so da update
+	quando precisa, stackando os updates anteriores.
+	portante, o que tem que ta no lazy tem que ser
+	associativo tambem;
+
+complexidades:
+	memoria: o(n);
+	build: o(n);
+	prop: o(1), atualiza valores do nodo;
+	query: o(logn), soma de [a, b];
+	update: o(logn), soma x em [a, b];
+*/
 
 
 namespace seg {

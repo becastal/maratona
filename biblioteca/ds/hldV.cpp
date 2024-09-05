@@ -1,14 +1,17 @@
-// HLD - vertice
-//
-// SegTree de soma
-// query / update de soma dos vertices
-//
-// Complexidades:
-// build - O(n)
-// query_path - O(log^2 (n))
-// update_path - O(log^2 (n))
-// query_subtree - O(log(n))
-// update_subtree - O(log(n))
+/*
+heavy-light decomposition (vertices)
+
+descricao:
+	mesma coisa da outra, mas com os valore nos vertices.
+
+complexidades:
+	memoria: o(n);
+	build: o(n);
+	query_path: o(log^2(n));
+	update_path: o(log^2(n));
+	query_subtree: o(log(n));
+	update_subtree: o(log(n));
+*/
 
 // namespace seg { ... }
 

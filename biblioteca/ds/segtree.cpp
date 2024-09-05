@@ -1,16 +1,19 @@
-// segtree point update.
-// 
-// resume resultados de segmentos em nodos de uma arvore binaria.
-// a operacao que une nodos tem que ser associativa.
-// a query acha esses resumos de jeito eficiente.
-// 
-// build: o(n);
-// query: o(logn), soma de [a, b];
-// update: o(logn), soma x na pos i;
+/* 
+segtree com point update
+
+descricao:
+	resume resultados de segmentos em nodos de uma
+	arvore binaria.
+
+complexidades:
+	memoria: o(n);
+	query: o(logn), soma de [a, b];
+	update: o(logn), soma x na pos i;
+*/
 
 namespace seg {
-	ll seg[4*MAX];
-	vector<int> v;
+	ll seg[4*MAX], v[MAX];
+	int n;
 
 	ll build(int p=1, int l=0, int r=n-1) {
 		if (l == r) return seg[p] = v[l];

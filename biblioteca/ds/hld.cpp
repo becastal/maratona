@@ -1,14 +1,20 @@
-// HLD - aresta
-//
-// SegTree de soma
-// query / update de soma das arestas
-//
-// Complexidades:
-// build - O(n)
-// query_path - O(log^2 (n))
-// update_path - O(log^2 (n))
-// query_subtree - O(log(n))
-// update_subtree - O(log(n))
+/*
+heavy-light decomposition
+
+descricao:
+	um jeito de querys e atualizacoes em arvores. da pra
+	colocar qualquer estrutura no lugar da seg, mas essa
+	implementacao usa a seg lazy que tem aqui tambem.
+	logo, precisa codar a seg tambem.
+
+complexidades:
+	memoria: o(n);
+	build: o(n);
+	query_path: o(log^2(n));
+	update_path: o(log^2(n));
+	query_subtree: o(log(n));
+	update_subtree: o(log(n));
+*/
 
 // namespace seg { ... }
 

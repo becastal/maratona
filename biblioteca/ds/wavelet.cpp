@@ -1,16 +1,26 @@
 /*
-	wavelet tree estatica
- 
-	descricao:
-		uma segtree mas encima de valores e nao de indices.
+wavelet tree estatica
 
-	complexidades (d = maxn - minn):
-		memoria: o(nlog(d));
-		build: o(nlog(d)); conta: o(log(d)), conta quantos em [x, y] que ocorrem em [i, j);
-		soma:  o(log(d)), soma os em [x, y] que ocorrem em [i, j);
-		somak: o(log(d)), soma os primeiros k-esimos que ocorrem em [i, j) ordenado;
-		kth:   o(log(d)), k-esimo menor valor que ocorre em [i, j) ordenado;
-		swp:   o(log(d)), inverte o valor n indice i com o i+1;
+descricao:
+	uma segtree mas encima de valores e nao de indices.
+
+complexidades (d = maxn - minn):
+	memoria: o(nlog(d));
+	build: o(nlog(d));
+	conta: o(log(d)),
+		conta quantos em [x, y] que ocorrem em [i, j);
+
+	soma:  o(log(d)),
+		soma os em [x, y] que ocorrem em [i, j);
+
+	somak: o(log(d)),
+		soma os primeiros que ocorrem em [i, j) ordenado;
+
+	kth:   o(log(d)),
+		k-esimo menor valor que ocorre em [i, j) ordenado;
+
+	swp:   o(log(d)),
+		inverte o valor n indice i com o i+1;
 */
 namespace wave {
     int n, v[MAX], delta = maxn-minn;

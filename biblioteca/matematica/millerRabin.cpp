@@ -1,9 +1,12 @@
-// miller-rabin
-//
-// checa se o numeros eh primo
-// normalmente depende um pouco de probabilidade, mas com esses primos hardcoded funciona ate n <= 3 * 10**18;
-//
-// o(log(n))
+/*
+miller-rabin
+
+descricao:
+	checa se  o numero eh primo em o(log(n))
+	normalmente depende de probabilidade, mas
+	com esses primos hardcodes funciona ate
+	n <= 3*10^18
+*/
 
 ll mul(ll a, ll b, ll m) {
 	ll ret = a*b - ll((long double)1/m*a*b+0.5)*m;

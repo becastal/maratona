@@ -1,7 +1,10 @@
 alguns exercicios maneiros e educativos sobre materias que peguei durante o caminho.
 
+grafo:
+[6]: https://atcoder.jp/contests/abc368/tasks/abc368_d
+
 dp:
 [7]: https://atcoder.jp/contests/abc369/tasks/abc369_d
-
+	
 two pointers:
 [5]: https://atcoder.jp/contests/abc369/tasks/abc369_c

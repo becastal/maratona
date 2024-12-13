@@ -1,0 +1,19 @@
+ideia:
+
+parte 0: (~5 min) introduzir os dois conceitos primeiro
+- complexidade eh uma ferramenta que serve pra isso.
+- stl eh outra ferramenta que nos ajuda. linkar a ideia das implementacoes do stl com a dificuldade de fazer quanquer coisa no c
+
+parte 1: (~20 min) complexidade de algoritmo
+1.1: introduzir o problema: eu quero poder metrificar os algoritmos de um jeito decente.
+     conversar o que seria esse jeito decente. introduzir knuth e a ideia que ele teve: achar uma funcao que
+	 dimensiona o "teto" do quao ruim seria um algoritmo a partir de como escala a entrada.
+1.2: demonstracoes de complexidade na pratica. 2 ou 3 exercicios pra que eles batam o olho no codigo e digam
+	 e dois algoritmos que eu vou ditar.
+1.3: definicao matematica e porque ela nos ajuda. operacoes com complexidade.
+1.4: outras complexidades e como elas aparecem. caso de checar se eh primo e busca binaria.
+
+parte 2: (~30 min) stl
+1.1: estruturas simples que resolvem problemas fundamentais.
+1.2: comecar com vector, falar sobre push_back. com isso, embalar stack, queue e deque.
+1.3: map, set;

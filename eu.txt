@@ -1,10 +1,56 @@
 alguns exercicios maneiros e educativos sobre materias que peguei durante o caminho.
 
+string:
+[2]: https://codeforces.com/contest/1729/problem/B
+[3]: https://atcoder.jp/contests/abc366/tasks/abc366_b
+[4]: https://atcoder.jp/contests/abc363/tasks/abc363_c
+[4]: https://codeforces.com/gym/104466/problem/E
+[5]: https://codeforces.com/contest/1996/problem/C
+
+matematica:
+[4]: https://codeforces.com/problemset/problem/489/C
+[7]: https://codeforces.com/contest/1933/problem/C
+
 grafo:
+[3]: https://codeforces.com/problemset/problem/489/B
+[4]: https://atcoder.jp/contests/abc362/tasks/abc362_d
 [6]: https://atcoder.jp/contests/abc368/tasks/abc368_d
+[6]: https://codeforces.com/contest/1931/problem/F
+[7]: https://codeforces.com/contest/2014/problem/E
+[7]: https://atcoder.jp/contests/abc373/tasks/abc373_d
+
+ds:
+[3]: https://codeforces.com/problemset/problem/313/B
+[5]: https://atcoder.jp/contests/abc382/tasks/abc382_c
+[5]: https://codeforces.com/problemset/problem/2008/D
+[7]: https://codeforces.com/gym/104466/problem/I
+[7]: https://atcoder.jp/contests/abc372/tasks/abc372_e
 
 dp:
+[4]: https://codeforces.com/contest/538/problem/B
+[6]: https://open.kattis.com/problems/orders
 [7]: https://atcoder.jp/contests/abc369/tasks/abc369_d
 	
 two pointers:
-[5]: https://atcoder.jp/contests/abc369/tasks/abc369_c
+[4]: https://atcoder.jp/contests/abc369/tasks/abc369_c
+[5]: https://codeforces.com/contest/1729/problem/D
+
+greedy:
+[3]: https://codeforces.com/contest/1931/problem/B
+
+binary search:
+[3]: https://atcoder.jp/contests/abc365/tasks/abc365_c
+
+outros problemas maneiros:
+[5]: https://codeforces.com/contest/1931/problem/D
+[6]: https://codeforces.com/contest/1931/problem/E
+[7]: https://atcoder.jp/contests/abc374/tasks/abc374_d
+
+PROVA DE GRAFOS
+	[2] https://cses.fi/problemset/task/1192
+	[3] https://www.spoj.com/problems/PT07Z/
+	[3] https://codeforces.com/problemset/problem/727/A
+	[4] https://cses.fi/problemset/task/1666
+	[4] https://cses.fi/problemset/task/1193
+	[5] https://vjudge.net/problem/UVA-429
+	[6] https://atcoder.jp/contests/abc368/tasks/abc368_d

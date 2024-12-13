@@ -27,8 +27,8 @@ struct DSU {
 
 	int query(int v, int k) {
 		v = find(v);
-		if (sz[v] < k) return -1;
-		return vert[v][sz[v] - k] + 1;
+		if ((int)vert[v].size() < k) return -1;
+		return vert[v][(int)vert[v].size() - k] + 1;
 	}
 
 	void join(int i, int j) {
@@ -38,6 +38,8 @@ struct DSU {
 		
 		vector<int> temp;
 		merge(vert[i].begin(), vert[i].end(), vert[j].begin(), vert[j].end(), back_inserter(temp));
+
+		if (temp.size() > 10) temp.erase(temp.begin(), temp.end() - 10);
 		vert[i] = move(temp);
 		vert[j].clear();
 	}

@@ -9,11 +9,16 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+void setIO(string nome) {
+	if (nome == "") return;
+	freopen((nome + ".in").c_str(), "r", stdin);
+	freopen((nome + ".out").c_str(), "w", stdout);
+}
+
 int main()
 {
     _;
-    ifstream fin("shell.in");
-    ofstream fout("shell.out");    
+	setIO("");
 
     return(0);
 }

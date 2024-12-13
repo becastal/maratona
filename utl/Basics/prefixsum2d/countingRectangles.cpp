@@ -9,6 +9,13 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+0110110
+0000010
+1000001
+0100001
+1100010
+1011000
+
 int main()
 {
     _;

@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+#include <ranges>
+#include <numeric>
+#define f first
+#define s second
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define endl '\n'
+#define dbg(x) cout << #x << " = " << x << endl
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+using namespace std;
+
+int main()
+{
+    _;
+
+    int n; cin >> n;
+    vector<int> v(n);
+    for (int& i : v) cin >> i;
+
+    auto da = [&](int k) {
+        for (int i = 0; i < k; i++) {
+            if (v[i] * 2 > v[n - k + i]) return 0;
+        }
+        return 1;
+    };
+
+    cout << *ranges::partition_point(views::iota(0, n / 2 + 1), da) - 1 << endl;
+
+    return 0;
+}
+

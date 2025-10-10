@@ -1,0 +1,34 @@
+0.  problema fundamental: busca em lista ordenada
+
+	- explicar porque eh util que a busca seja rapida
+	- mostrar como o algoritmo funciona
+	- codar um basiquinho com o std::lower_bound.
+		- A. Binary Search (https://codeforces.com/edu/course/2/lesson/6/1/practice/contest/283911/problem/A)
+	- questionar o porque dele funcionar: o que garante que, a cada etapa, eu consigo ignorar metade da array
+
+1.  funcoes monotonicas
+
+	- array 0 0 0 0 0 0 1 1 1 1, simplificacao de v[i] <= x.
+	- generalizacao da ideia da busca binaria.
+	- demonstracao que ela serve pra resolver outros problemas que generalizem.
+
+2.  outros exemplos
+
+	- busca binaria na resposta (*).
+	- como ela aparece em outros problemas de maratona.
+	- exemplos:
+		- Torre de Cartas (https://judge.beecrowd.com/pt/problems/view/3420)
+		- Array Division (https://cses.fi/problemset/task/1085)
+
+
+3.  mais alguns exemplos
+	
+	- a dificuldade relacionada a ela (so comentar, mas mostrar a utilidade dela):
+		- B. The Meeting Place Cannot Be Changed (https://codeforces.com/contest/782/problem/B)
+		- K. Delivery Bears (https://codeforces.com/group/KqUNBZJnMk/contest/584381/problem/K)
+
+4.  as listas
+
+	usaco: https://usaco.guide/silver/binary-search.
+	ufmg: meu docs, talvez tambem adicionar no deles.
+	utl: https://youkn0wwho.academy/topic-list/binary_search.

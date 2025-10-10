@@ -1,43 +1,30 @@
-/*
-aritmetica modular
+// Aritmetica Modular
+//
+// O mod tem q ser primo
 
-descricao:
-	da pra usar mint como se fosse int normal
+template<int p> struct mod_int {
+	ll expo(ll b, ll e) { ll ret = 1; while (e) { if (e % 2) ret = ret * b % p; e /= 2, b = b * b % p; } return ret; }
+	ll inv(ll b) { return expo(b, p-2); }
 
-complexidades:
-	tudo o(1) menos '/' e pow que eh alguma coisa
-	esquisita
-*/
-struct modInt {
-  	unsigned x;
-  	static int mod;
-
-	modInt() : x(0) { }
-	modInt(signed sig) : x((sig % mod + mod) % mod) { }
-	modInt(signed long long sig) : x((sig % mod + mod) % mod) { }
-	
-	int get() const { return (int)x; }
-
-	modInt pow(long long p) const {
-		modInt res = 1, a = *this;
-		while (p) {
-			if (p & 1) res *= a;
-			a *= a; 
-			p >>= 1;
-		}
-		return res;
+	using m = mod_int;
+	int v;
+	mod_int() : v(0) {}
+	mod_int(ll v_) { if (v_ >= p or v_ <= -p) v_ %= p; if (v_ < 0) v_ += p; v = v_; }
+	m& operator +=(const m& a) { v += a.v; if (v >= p) v -= p; return *this; }
+	m& operator -=(const m& a) { v -= a.v; if (v < 0) v += p; return *this; }
+	m& operator *=(const m& a) { v = v * ll(a.v) % p; return *this; }
+	m& operator /=(const m& a) { v = v * inv(a.v) % p; return *this; }
+	m operator -(){ return m(-v); }
+	m& operator ^=(ll e) { if (e < 0) { v = inv(v); e = -e; } v = expo(v, e);
+	bool operator ==(const m& a) { return v == a.v; }
+	bool operator !=(const m& a) { return v != a.v; }
+	friend istream& operator >>(istream& in, m& a) { ll val; in >> val; a = m(val); return in; }
+	friend ostream& operator <<(ostream& out, m a) { return out << a.v;
 	}
-	modInt& operator+=(modInt that) { if ((x += that.x) >= mod) x -= mod; return *this; }
-	modInt& operator-=(modInt that) { if ((x += mod - that.x) >= mod) x -= mod; return *this; }
-	modInt& operator*=(modInt that) { x = (__int128)x * that.x % mod; return *this; }
-	modInt& operator/=(modInt that) { return (*this) *= that.pow(mod - 2); }
-	modInt operator+(modInt that) const { return modInt(*this) += that; }
-	modInt operator-(modInt that) const { return modInt(*this) -= that; }
-	modInt operator*(modInt that) const { return modInt(*this) *= that; }
-	modInt operator/(modInt that) const { return modInt(*this) /= that; }
-	bool operator<(modInt that) const { return x < that.x; }
-	bool operator>(modInt that) const { return x > that.x; }
-	friend ostream& operator<<(ostream& os, modInt a) { os << a.x; return os; }
-	friend istream& operator>>(istream& is, modInt& a) { is >> a.x; a.x = (a.x % mod + mod) % mod; return is; 
-	}
+	friend m operator +(m a, m b) { return a += b; }
+	friend m operator -(m a, m b) { return a -= b; }
+	friend m operator *(m a, m b) { return a *= b; }
+	friend m operator /(m a, m b) { return a /= b; }
+	friend m operator ^(m a, ll e) { return a ^= e; }
 };
+typedef mod_int<(int)1e9+7> mint;

@@ -1,0 +1,44 @@
+void solve() {
+	int n; cin >> n;
+	vector<int> v(n), res(n);
+	for (int& i : v) cin >> i;
+
+	for (int l = 0, r; l < n; ) {
+		r = l+1;
+
+		while (v[l] == v[r]) {
+			r++;
+		}
+
+		for (int i = l, tam = (r - l); i < r; i++) {
+			res[i] = tam--;
+		}
+		l = r;
+	}
+
+	int q; cin >> q;
+	for (int i = 0, l, r; i < q; i++) {
+		cin >> l >> r; l--, r--;
+		if (res[l] <= r - l) {
+			cout << l+1 << ' ' << l + res[l]+1 << endl;
+		} else {
+			cout << "-1 -1" << endl;
+		}
+	}
+	cout << endl;
+}
+
+int main()
+{
+    _;
+
+	int t; cin >> t;
+	while (t--) {
+		solve();
+	}
+    
+    return(0);
+}
+
+qual a complexidade?
+o(tn + q)

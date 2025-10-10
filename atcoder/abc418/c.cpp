@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define f first
+#define s second
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define endl '\n'
+#define dbg(x) cout << #x << " = " << x << endl
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+using namespace std;
+
+int solve() {
+	int n, q; cin >> n >> q;
+	vector<int> A(n);
+	for (int& i : A) cin >> i;
+
+	sort(all(A));
+	vector<ll> P(n+1, 0);
+	for (int i = 1; i <= n; i++) {
+		P[i] = P[i-1] + A[i-1];
+	}
+
+	while (q--) {
+		int b; cin >> b;
+		if (b > A[n-1]) {
+			cout << -1 << endl;
+			continue;
+		}
+		
+		ll p = lower_bound(all(A), b) - A.begin(), sobra = (n - p);
+		cout << 1LL * P[p] + (b - 1) * sobra + 1 << endl;
+	}
+
+	return(0);
+}
+
+int main()
+{
+    _;
+
+	int t = 1; //cin >> t;
+	while (t--) {
+		solve();
+	}
+    
+    return(0);
+}

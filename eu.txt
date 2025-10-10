@@ -1,56 +1,111 @@
 alguns exercicios maneiros e educativos sobre materias que peguei durante o caminho.
 
 string:
+[2]: https://atcoder.jp/contests/agc006/tasks/agc006_a
 [2]: https://codeforces.com/contest/1729/problem/B
+[2]: https://atcoder.jp/contests/abc394/tasks/abc394_c
 [3]: https://atcoder.jp/contests/abc366/tasks/abc366_b
 [4]: https://atcoder.jp/contests/abc363/tasks/abc363_c
 [4]: https://codeforces.com/gym/104466/problem/E
 [5]: https://codeforces.com/contest/1996/problem/C
 
 matematica:
+[2]: https://atcoder.jp/contests/abc060/tasks/abc060_b
+[3]: https://judge.beecrowd.com/pt/problems/view/1213
+[3]: https://codeforces.com/contest/1352/problem/B
+[3]: https://codeforces.com/contest/1742/problem/D
+[4]: https://codeforces.com/group/btcK4I5D5f/contest/553853/problem/B
+[4]: https://vjudge.net/problem/UVA-12720
+[4]: https://codeforces.com/contest/1370/problem/B
 [4]: https://codeforces.com/problemset/problem/489/C
+[4]: https://judge.beecrowd.com/pt/problems/view/2474
+[4]: https://atcoder.jp/contests/abc357/tasks/abc357_d
+[5]: https://codeforces.com/contest/1999/problem/ear
+[6]: https://codeforces.com/contest/2065/problem/G
 [7]: https://codeforces.com/contest/1933/problem/C
 
 grafo:
 [3]: https://codeforces.com/problemset/problem/489/B
+[3]: https://codeforces.com/contest/1676/problem/G
+[3]: https://atcoder.jp/contests/abc399/tasks/abc399_c
 [4]: https://atcoder.jp/contests/abc362/tasks/abc362_d
+[4]: https://codeforces.com/contest/1760/problem/G
+[4]: https://codeforces.com/contest/1296/problem/E1
+[5]: https://codeforces.com/gym/105979/problem/D
+[5]: https://codeforces.com/contest/839/problem/C
+[5]: https://codeforces.com/gym/105790/problem/H
+[5]: https://codeforces.com/contest/1851/problem/E
+[5]: https://codeforces.com/contest/1581/problem/B
+[5]: https://atcoder.jp/contests/abc392/tasks/abc392_e
 [6]: https://atcoder.jp/contests/abc368/tasks/abc368_d
 [6]: https://codeforces.com/contest/1931/problem/F
+[6]: https://judge.beecrowd.com/pt/problems/view/1391
+[7]: https://judge.beecrowd.com/pt/problems/view/2932
 [7]: https://codeforces.com/contest/2014/problem/E
 [7]: https://atcoder.jp/contests/abc373/tasks/abc373_d
+[8]: https://atcoder.jp/contests/abc289/tasks/abc289_e
+[8]: https://codeforces.com/contest/1927/problem/F
+
+stl:
+[1]: https://atcoder.jp/contests/abc402/tasks/abc402_b
+[2]: https://codeforces.com/contest/1851/problem/B
+[3]: https://atcoder.jp/contests/abc413/tasks/abc413_c
+[3]: https://vjudge.net/problem/UVA-1241
+[3]: https://codeforces.com/contest/1791/problem/D
+[3]: https://codeforces.com/contest/1851/problem/D
+[4]: https://codeforces.com/contest/1742/problem/E
+[4]: https://atcoder.jp/contests/abc388/tasks/abc388_c
 
 ds:
+[2]: https://atcoder.jp/contests/abc391/tasks/abc391_c
 [3]: https://codeforces.com/problemset/problem/313/B
+[3]: https://codeforces.com/contest/1279/problem/C
 [5]: https://atcoder.jp/contests/abc382/tasks/abc382_c
 [5]: https://codeforces.com/problemset/problem/2008/D
+[5]: https://codeforces.com/contest/1791/problem/F
+[6]: https://codeforces.com/contest/847/problem/B
+[6]: https://codeforces.com/contest/2139/problem/D
 [7]: https://codeforces.com/gym/104466/problem/I
 [7]: https://atcoder.jp/contests/abc372/tasks/abc372_e
 
 dp:
+[3]: https://atcoder.jp/contests/abc242/tasks/abc242_c
+[3]: https://codeforces.com/contest/1272/problem/D
 [4]: https://codeforces.com/contest/538/problem/B
+[4]: https://open.kattis.com/problems/bagoftiles
+[4]: https://atcoder.jp/contests/abc289/tasks/abc289_d
+[5]: https://vjudge.net/problem/UVA-166
 [6]: https://open.kattis.com/problems/orders
+[6]: https://judge.beecrowd.com/pt/problems/view/2841
 [7]: https://atcoder.jp/contests/abc369/tasks/abc369_d
 	
 two pointers:
+[3]: https://codeforces.com/contest/1272/problem/C
+[3]: https://codeforces.com/contest/2094/problem/D
 [4]: https://atcoder.jp/contests/abc369/tasks/abc369_c
+[5]: https://codeforces.com/contest/1364/problem/B
 [5]: https://codeforces.com/contest/1729/problem/D
 
 greedy:
 [3]: https://codeforces.com/contest/1931/problem/B
 
 binary search:
+[2]: https://codeforces.com/contest/1619/problem/B
 [3]: https://atcoder.jp/contests/abc365/tasks/abc365_c
+[3]: https://atcoder.jp/contests/cf16-final/tasks/codefestival_2016_final_b
+[4]: https://codeforces.com/contest/1999/problem/G1
+[5]: https://codeforces.com/contest/1462/problem/F
+[5]: https://codeforces.com/group/btcK4I5D5f/contest/553853/problem/K
+[5]: https://codeforces.com/contest/782/problem/B
 
 outros problemas maneiros:
+[4]: https://www.codechef.com/problems/MINSMODM
+[5]: https://codeforces.com/contest/1669/problem/F
 [5]: https://codeforces.com/contest/1931/problem/D
+[5]: https://atcoder.jp/contests/abc404/tasks/abc404_d
 [6]: https://codeforces.com/contest/1931/problem/E
 [7]: https://atcoder.jp/contests/abc374/tasks/abc374_d
 
-PROVA DE GRAFOS
-	[2] https://cses.fi/problemset/task/1192
-	[3] https://www.spoj.com/problems/PT07Z/
-	[3] https://codeforces.com/problemset/problem/727/A
-	[4] https://cses.fi/problemset/task/1666
-	[4] https://cses.fi/problemset/task/1193
-	[5] https://vjudge.net/problem/UVA-429
-	[6] https://atcoder.jp/contests/abc368/tasks/abc368_d
+mostrar charles:
+o(nm) mais absurdo: https://codeforces.com/gym/101102/problem/D
+teste

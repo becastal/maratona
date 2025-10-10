@@ -10,75 +10,88 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 typedef pair<int, int> ii;
 
+const ii movs[4] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+
 int main()
 {
     _;
 
 	int n, m; cin >> n >> m;
-	vector<vector<int>> mp(n, vector<int>(n));
-	for (auto& l : mp) {
-		for (auto& c : l) {
-			cin >> c;
-		}
-	}
-	// na real acho que vou ter que gerar todas strings quarternarias de tamanho m-1, tomando cuidado pra
-	// nao usar as que contam a mesma celula duas vezes. dai eu acho que gera todos os componentes conexos
-	// dai acho que a complexidade fica (4^9*n*n), que eh 3e9 no pior caso. com tle 8s talvez passe.
+	vector<vector<int>> v(n, vector<int>(n));
+	for (auto& a : v) for (auto& b : a) cin >> b;
 
-	vector<set<ii>> formatos;
-	vector<ii> movs = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+	auto valido = [] (int i, int j, int n, int m) { return i >= 0 and i < n and j >= 0 and j < m; };
 
-	auto valido = [&](int i, int j) {
-		return i >= 0 and j >= 0 and i < n and j < n;
-	};
-
-	function<void(set<ii>, int, int, int)> f = [&](set<ii> v, int i, int j, int k) {
-		if (k > m) return;
-		if (v.size() == m) { formatos.push_back(v); return; }
-
-		for (auto mov : movs) {
-			int ni = i + mov.f, nj = j + mov.s; 
-
-			if (!valido(ni, nj)) continue;
-			if (v.count(ii(ni, nj))) continue;
-			v.emplace(ni, nj);
-			f(v, ni, nj, k+1);
-			f(v, i, j, k+1);
-			v.erase(ii(ni, nj));
-		}
-	};
-	set<ii> origem; origem.emplace(0, 0);
-	f(origem, 0, 0, 0);
-
-	//for (auto& s : formatos) {
-	//	vector<vector<int>> vis(m, vector<int>(m, 0));
-	//	for (auto& [i, j] : s) {
-	//		//cout << '(' << i << ", " << j << ')' << ", ";
-	//		vis[i][j] = 1;	
-	//	}
-	//	for (auto l : vis) { for (auto c : l) cout << c; cout << endl; }
-	//	cout << endl;
-	//}
-
-	auto soma = [&](int i, int j, set<ii>& s) {
-		int res = 0;
-		for (auto& [dx, dy] : s) {
-			if (!valido(i+dx, j+dy)) return 0;	
-			res += mp[i+dx][j+dy];
-		}
-		return res;
-	};
-
-	// para cada posicao, checar todos os componentes conexos de tamanho m;
 	int res = 0;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			for (auto& k : formatos) {
-				res = max(res, soma(i, j, k));
+	function<void(vector<int>, int)> f = [&](vector<int> vi, int mi) {
+		if (mi == 0) {
+			
+			vector<vector<int>> vis((int)vi.size(), vector<int>(m));
+			int cont = 0;
+			for (int i = 0; i < (int)vi.size(); i++) {
+				for (int j = 0; j < m; j++) {
+					if (!vis[i][j] and vi[i] & (1 << j)) {
+						stack<ii> st; st.emplace(i, j);
+						vis[i][j] = 1;
+						cont++;
+						
+						while (!st.empty()) {
+							ii u = st.top(); st.pop();
+
+							for (auto mov : movs) {
+								ii v = {u.f + mov.f, u.s + mov.s};
+
+								if (valido(v.f, v.s, (int)vi.size(), m) and !vis[v.f][v.s] and vi[v.f] & (1 << v.s)) {
+									vis[v.f][v.s] = 1;	
+									st.emplace(v);
+								}
+							}
+						}
+					}
+				}
+			}
+
+			if (cont > 1) return;
+
+			//for (int i : vi) {
+			//	for (int j = 0; j < m; j++) {
+			//		cout << !!(i & (1 << j));
+			//	}
+			//	cout << endl;
+			//}
+			//cout << endl;
+
+			int s = 0;
+			for (int i : vi) s |= i;
+			int largura = __builtin_popcount(s), altura = vi.size();
+
+			for (int i = 0; i <= n - altura; i++) {
+				for (int j = 0; j <= n - largura; j++) {
+					int agr = 0;
+					for (int ii = 0; ii < altura; ii++) {
+						for (int jj = 0; jj < largura; jj++) {
+							agr += !!(vi[ii] & (1 << jj)) * v[i+ii][j+jj];
+						}
+					}
+					res = max(res, agr);
+				}
+			}
+			return;
+		}
+
+		for (int i = 0; i < (1 << m); i++) {
+			if (i & vi.back() and mi - __builtin_popcount(i) >= 0) {
+				auto vii = vi;
+				vii.push_back(i);
+				f(vii, mi - __builtin_popcount(i));
 			}
 		}
 	};
-	cout << res << endl;
 
+	for (int i = 0; i < (1 << m); i++) {
+		f(vector<int>{i}, m - __builtin_popcount(i));
+	}
+	cout << res << endl;
+    
     return(0);
 }

@@ -1,0 +1,152 @@
+\begin{frame}{Set}
+		\begin{center}
+		"\textcolor{red}{a}bracadabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"a\textcolor{red}{b}racadabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"ab\textcolor{red}{r}acadabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abr\textcolor{red}{a}cadabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abra\textcolor{red}{c}adabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abrac\textcolor{red}{a}dabralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abraca\textcolor{red}{d}abralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracad\textcolor{red}{a}bralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracada\textcolor{red}{b}ralbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadab\textcolor{red}{r}albertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabr\textcolor{red}{a}lbertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabra\textcolor{red}{l}bertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'l', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabral\textcolor{red}{b}ertini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'l', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralb\textcolor{red}{e}rtini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'l', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralbe\textcolor{red}{r}tini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'l', 'r'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralber\textcolor{red}{t}ini"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'l', 'r', 't'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralbert\textcolor{red}{i}ni"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'i', 'l', 'r', 't'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralberti\textcolor{red}{n}i"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'i', 'l', 'n', 'r', 't'\}}
+\end{frame}
+
+\begin{frame}{Set}
+		\begin{center}
+		"abracadabralbertin\textcolor{red}{i}"
+		\end{center}
+	\vfill
+	\textcolor{blue}{\texttt{set<char>}: \{'a', 'b', 'c', 'd', 'e', 'i', 'l', 'n', 'r', 't'\}}
+\end{frame}
+

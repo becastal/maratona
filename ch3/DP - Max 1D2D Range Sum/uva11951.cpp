@@ -10,32 +10,42 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
 void solve() {
-	int n, m, k; cin >> n >> m >> k;
-	ll total = 0;
-	
+	int n, m, k;
+	cin >> n >> m >> k;
+
 	vector<vector<int>> a(n, vector<int>(m));
+
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			cin >> a[i][j];	
-			total ++ a[i][j]
-			if (j) a[i][j] += a[i][j-1];
+			cin >> a[i][j];
+			if (i) a[i][j] += a[i-1][j];
 		}
 	}
 
-    ll res = ;
-    for (int i = 0; i < m; i++) {
-        for (int j = i; j < m; j++) {
-            ll subRec = 0;
-            for (int ii = 0; ii < n; ii++) {
-                ll colSum = a[ii][j] - (i > 0 ? a[ii][i - 1] : 0LL);
-                subRec = max(subRec + colSum, 0LL);
-				if (subRec > k) subRec = 0LL;
-                res = max(res, subRec);
-            }
-        }
-    }
+	int area = 0, menor_c = INF;
+	for (int i = 0; i < n; i++) {
+		for (int ii = i; ii < n; ii++) {
+			int j = 0, tmp = 0;
 
-	cout << res << endl;
+			for (int jj = 0; jj < m; jj++) {
+				tmp += a[ii][jj] - (i ? a[i-1][jj] : 0);
+
+				while (j <= jj and tmp > k) {
+					tmp -= a[ii][j] - (i ? a[i-1][j] : 0);
+					j++;
+				}
+
+				int areai = (jj-j+1)*(ii-i+1);
+
+				if (areai > area or (areai == area and tmp < menor_c)) {
+					area = areai;
+					menor_c = tmp;
+				}
+			}
+		}
+	}
+
+	cout << area << ' ' << menor_c << endl;
 }
 
 int main()
@@ -44,9 +54,10 @@ int main()
 
 	int T; cin >> T;
 	for (int t = 1; t <= T; t++) {
-		cout << "Case #" << t << ' ';
+		cout << "Case #" << t << ": ";
 		solve();
 	}
-    
-    return(0);
+
+    return 0;
 }
+

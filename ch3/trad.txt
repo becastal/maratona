@@ -1,21 +1,19 @@
-uva10130
-uva1213
-uva11566
-uva11832
-uva431
-uva562
-uva990
-uva10261
-uva10616
-uva10664
-uva10690
-uva10819
-uva11003
-uva11341
-uva11658
-uva12621
-knapsack
-orders
-presidentialelections
-muzicari
-ninepacks
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://vjudge.net/problem/UVA-594"; "uva594")
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://vjudge.net/problem/UVA-700"; "uva700")
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://vjudge.net/problem/UVA-1241"; "uva1241")
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://vjudge.net/problem/UVA-10469"; "uva10469")
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://vjudge.net/problem/UVA-11173"; "uva11173")
+ch3	DS - Bit Manipulation	1	=HYPERLINK("https://open.kattis.com/problems/snappereasy"; "snappereasy")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://vjudge.net/problem/UVA-11933"; "uva11933")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://vjudge.net/problem/UVA-12571"; "uva12571")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://vjudge.net/problem/UVA-11760"; "uva11760")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://open.kattis.com/problems/bitbybit"; "bitbybit")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://open.kattis.com/problems/deathstar"; "deathstar")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://open.kattis.com/problems/bits"; "bits")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://open.kattis.com/problems/iboard"; "iboard")
+ch3	DS - Bit Manipulation	2	=HYPERLINK("https://open.kattis.com/problems/zebrasocelots"; "zebrasocelots")
+ch3	DS - Bit Manipulation	3	=HYPERLINK("https://vjudge.net/problem/UVA-10264"; "uva10264")
+ch3	DS - Bit Manipulation	3	=HYPERLINK("https://vjudge.net/problem/UVA-12720"; "uva12720")
+ch3	DS - Bit Manipulation	3	=HYPERLINK("https://vjudge.net/problem/UVA-11926"; "uva11926")
+ch3	DS - Bit Manipulation	3	=HYPERLINK("https://open.kattis.com/problems/snapperhard"; "snapperhard")
+ch3	DS - Bit Manipulation	3	=HYPERLINK("https://open.kattis.com/problems/hypercube"; "hypercube")

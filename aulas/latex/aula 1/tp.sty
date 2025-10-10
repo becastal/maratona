@@ -1,0 +1,133 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{meulistings}[2023/11/15 Pacote personalizado para listagens]
+
+% Pacotes básicos
+\RequirePackage{amsmath}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{textcomp}
+
+% Pacotes para tabelas
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{caption}
+\RequirePackage{adjustbox}
+
+% Outros pacotes
+\RequirePackage[normalem]{ulem}
+\RequirePackage{listings}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins}
+\RequirePackage[bookmarks=true,bookmarksnumbered=true,colorlinks=true,linkcolor=blue]{hyperref}
+
+% Configuração de cores
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{azulblue}{rgb}{0.1, 0.1, 1}
+\definecolor{darkgreen}{RGB}{0, 150, 0}
+
+% Configuração do listings
+\lstset{
+    language=C++,
+    tabsize=4,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=6pt,
+    breaklines=true,
+    showstringspaces=false,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{darkgreen},
+    stringstyle=\color{red},
+    backgroundcolor=\color{white},
+    rulecolor=\color{black},
+    xleftmargin=12pt,
+    xrightmargin=12pt,
+    aboveskip=12pt,
+    belowskip=12pt,
+    framerule=0.4pt,
+    framesep=6pt,
+    frame=tb,
+}
+
+% Comando destaque moderno
+\RequirePackage{expl3}
+\ExplSyntaxOn
+\NewDocumentCommand{\destaque}{m m m}
+{
+  \only<#1>{
+    \tl_set:Nn \l_tmpa_tl {#2}
+    \int_zero:N \l_tmpa_int
+    \tl_map_inline:Nn \l_tmpa_tl {
+      \int_incr:N \l_tmpa_int
+      \int_compare:nTF {\l_tmpa_int == #3}
+        {\textcolor{red}{##1}}
+        {##1}
+    }
+  }
+}
+\NewDocumentCommand{\simpleset}{m m m m}{
+  % #1 = slide, #2 = string, #3 = posição, #4 = elementos do set
+  \only<#1>{
+    \begin{minipage}{\textwidth}
+    \centering
+    String: \quad \destaque{#1}{#2}{#3} \\
+
+    \vspace{13pt}
+    
+    Set: \quad \{{#4}\}
+    \end{minipage}
+  }
+}
+
+\NewDocumentCommand{\pushStack}{m m}{
+    \only<#1>{
+        \begin{itemize}
+            \item stack.push({#2});
+        \end{itemize}
+    }
+}
+
+\NewDocumentCommand{\popStack}{m}{
+    \only<#1>{
+        \begin{itemize}
+            \item stack.pop();
+        \end{itemize}
+    }
+}
+
+\newcommand{\enqueue}[2]{
+    \only<#1>{
+        \begin{itemize}
+            \item queue.push({#2});
+        \end{itemize}
+    }
+}
+
+\newcommand{\dequeue}[1]{
+    \only<#1>{
+        \begin{itemize}
+            \item queue.pop();
+        \end{itemize}
+    }
+}
+\newcommand{\pqPush}[2]{
+    \only<#1>{
+        \begin{itemize}
+            \item pq.push({#2});
+        \end{itemize}
+    }
+}
+
+\newcommand{\pqPop}[1]{
+    \only<#1>{
+        \begin{itemize}
+            \item pq.pop();
+        \end{itemize}
+    }
+}
+
+\ExplSyntaxOff
+\endinput

@@ -1,0 +1,48 @@
+\ProvidesPackage{meulistings}
+\usepackage{booktabs}
+\usepackage{caption}  
+\usepackage{tabularx}  
+\RequirePackage{listings}
+\usepackage{xcolor} % Para usar cores
+\usepackage{colortbl} % Para colorir tabelas
+\usepackage{graphicx} % Para redimensionar a tabela
+\RequirePackage{textcomp}
+\usepackage{amsmath}
+\usepackage{adjustbox}
+\usepackage{hyperref} % Para links clicáveis
+\usepackage{tcolorbox} % Para caixas coloridas
+\tcbuselibrary{skins}
+
+% Estilos da referencia
+\usepackage[backend=biber, style=ieee]{biblatex}
+
+% Definição das cores
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{azulblue}{rgb}{0.1, 0.1, 1}
+% Configuração do código
+\lstset{
+    language=C++,
+    tabsize=4,
+    captionpos=b,
+    numbers=left,                % Exibir números de linha à esquerda
+    numberstyle=\tiny\color{gray}, % Estilo dos números de linha
+    numbersep=6pt,               % Espaço entre números e código
+    breaklines=true,             % Quebra de linha automática
+    showstringspaces=false,      % Não mostrar espaços em branco
+    basicstyle=\footnotesize\ttfamily, % Fonte monoespaçada pequena
+    keywordstyle=\color{blue},  % Azul para palavras-chave
+    commentstyle=\color{green}, % Verde para comentários
+    stringstyle=\color{red},    % Vermelho para strings
+    backgroundcolor=\color{white}, % Fundo branco
+    rulecolor=\color{black},    % Cor das linhas horizontais
+    xleftmargin=12pt,           % Margem esquerda
+    xrightmargin=12pt,          % Margem direita
+    aboveskip=12pt,             % Espaço acima do código
+    belowskip=12pt,             % Espaço abaixo do código
+    framerule=0.4pt,            % Espessura das linhas horizontais
+    framesep=6pt,               % Espaço entre as linhas e o código
+    frame=tb,                   % Linhas apenas em cima (top) e embaixo (bottom)
+}
+\endinput
+

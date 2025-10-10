@@ -4,10 +4,12 @@ im gonne give you a list of problems that i want you to answer in this format:
 
 ch3	DP - Longest Increasing Subsequence	3	studentsko
 
-the first and second column should be: ch3 and DP - 01 Knapsack, which describe the topic of the problem. 
+the first and second column should be: ch3 and DP - Coin Change, which describe the topic of the problem. 
 
 for the third column, you should search the web for statistics and discussions and rate the difficulty of the problem between 1, 2 and 3. 3 being the hardest in the scale.
 
 for the fourth, do this: =HIPERLINK("https://open.kattis.com/problems/studentsko";"studentsko"). find the link of the problem (if theyre uva... then find the link from vjudge, if not, find from kattis) and link it that way.
 
-here is my list. 
+also, please give me your answer in text so i can easily copy it out.
+
+here is my list: 

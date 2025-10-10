@@ -34,23 +34,21 @@ int main()
 
             if (ndist > d[u][usou]) continue;
 
-            for (auto [v, w] : g[u]) {
-                if (d[v][0] > d[u][usou] + w) {
-                    d[v][0] = d[u][usou] + w;
-                    pq.emplace(-d[v][0], v, 0);
-                }
-
-                if (!usou and d[v][1] > d[u][0] + w / 2) {
-                    d[v][1] = d[u][0] + w / 2;
-                    pq.emplace(-d[v][1], v, 1);
-                }
-
-                if (usou and d[v][1] > d[u][1] + w) {
-                    d[v][1] = d[u][1] + w;
-                    pq.emplace(-d[v][1], v, 1);
-                }
-            }
-        }
+			for (auto [v, w] : g[u]) {
+				if (!usou and d[v][0] > d[u][0] + w) {
+					d[v][0] = d[u][0] + w;
+					pq.emplace(-d[v][0], v, 0);
+				}
+				if (!usou and d[v][1] > d[u][0] + w / 2) {
+					d[v][1] = d[u][0] + w / 2;
+					pq.emplace(-d[v][1], v, 1);
+				}
+				if (usou and d[v][1] > d[u][1] + w) {
+					d[v][1] = d[u][1] + w;
+					pq.emplace(-d[v][1], v, 1);
+				}
+			}
+		}
 
         return min(d[n-1][0], d[n-1][1]);
     };

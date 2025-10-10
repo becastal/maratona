@@ -1,0 +1,11 @@
+[0]: introducao ao c++ e a maratona.
+	- formato dos problemas. (2 slides)
+	- tipos de dados. (3 slides)
+	- input/output. (2 slides)
+	- ambiente. (2 slides)
+	- logica simples (3 problemas).
+		- https://judge.beecrowd.com/pt/problems/view/1015
+		- https://judge.beecrowd.com/pt/problems/view/2172
+		- https://judge.beecrowd.com/pt/problems/view/1151
+
+[1]: intrudocao ao stl

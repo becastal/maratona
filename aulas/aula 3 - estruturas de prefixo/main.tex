@@ -1,0 +1,211 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usepackage{tp} 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\title{Aula 3}
+\subtitle{Estruturas de Prefixo}
+\author{Maratona de Programação}
+\institute{FEI}
+\date{\today}
+\setbeamertemplate{navigation symbols}{}
+
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Fundamento: queries estáticas de soma}
+	\textcolor{structure}{Problema}: dado um vetor A de tamanho N $(N \leq 10^6,  \lvert A_i \rvert \leq 10^9)$ , responda Q queries $(Q \leq 10^6)$ do tipo:
+	\begin{center}
+		Dados dois índices $l$ e $r$ $(1 \leq l < r \leq N)$, \\
+		computar a soma dos elementos do vetor $A$ de $l$ até $r$. \\
+		Formalmente, respoder para cada query:
+		\textcolor{structure}{
+			\[
+				\sum_{i=l}^{r} A_i = A_l + A_{l+1} + \dots + A_r
+			\]
+			}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Fundamento: queries estáticas de soma}
+	\framesubtitle{Exemplos}
+
+	\pause
+	\begin{center}
+		$l = 1, r = 5$
+		\renewcommand{\arraystretch}{1.3}
+		\setlength{\tabcolsep}{8pt}
+
+		\vspace{10pt}
+		\begin{tabular}{c c}
+			$A:$ &
+			{
+				\rowcolors{1}{structure!10!white}{structure!5!white}
+				\begingroup
+				\color{structure}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+					\hline
+					\textbf{7} & \textbf{5} & \textbf{2} & \textbf{3} & \textbf{2} & 7 & 8 & 5 & 1 \\
+					\hline
+				\end{tabular}
+				\endgroup
+			}
+		\end{tabular}
+
+		\vspace{-8pt}
+		\begin{tabular}{c c}
+			\hspace{25pt}
+			\setlength{\tabcolsep}{9.3pt}
+			{\tiny
+			\begin{tabular}{ccccccccc}
+				1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+			\end{tabular}
+			}
+		\end{tabular}
+	\end{center}
+
+	\pause
+	\begin{center}
+		$l = 5, r = 8$
+		\renewcommand{\arraystretch}{1.3}
+		\setlength{\tabcolsep}{8pt}
+
+		\vspace{10pt}
+		\begin{tabular}{c c}
+			$A:$ &
+			{
+				\rowcolors{1}{structure!10!white}{structure!5!white}
+				\begingroup
+				\color{structure}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+					\hline
+					7 & 5 & 2 & 3 & \textbf{2} & \textbf{7} & \textbf{8} & \textbf{5} & 1 \\
+					\hline
+				\end{tabular}
+				\endgroup
+			}
+		\end{tabular}
+
+		\vspace{-8pt}
+		\begin{tabular}{c c}
+			\hspace{25pt}
+			\setlength{\tabcolsep}{9.3pt}
+			{\tiny
+			\begin{tabular}{ccccccccc}
+				1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+			\end{tabular}
+			}
+		\end{tabular}
+	\end{center}
+
+	\pause
+	\begin{center}
+		$l = 4, r = 6$
+		\renewcommand{\arraystretch}{1.3}
+		\setlength{\tabcolsep}{8pt}
+
+		\vspace{10pt}
+		\begin{tabular}{c c}
+			$A:$ &
+			{
+				\rowcolors{1}{structure!10!white}{structure!5!white}
+				\begingroup
+				\color{structure}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+					\hline
+					7 & 5 & 2 & \textbf{3} & \textbf{2} & \textbf{7} & 8 & 5 & 1 \\
+					\hline
+				\end{tabular}
+				\endgroup
+			}
+		\end{tabular}
+
+		\vspace{-8pt}
+		\begin{tabular}{c c}
+			\hspace{25pt}
+			\setlength{\tabcolsep}{9.3pt}
+			{\tiny
+			\begin{tabular}{ccccccccc}
+				1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+			\end{tabular}
+			}
+		\end{tabular}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{Fundamento: queries estáticas de soma}
+	\framesubtitle{Ideia de solução 1: brutar cada query}
+
+	\begin{itemize}
+			\pause
+		\item \textcolor{structure}{Ideia:} Para cada query, iterar de $l$ até $r$ no vetor e ir acumulando $A_i$.
+			\pause
+		\item Isso com certeza da o resultado certo, mas \dots
+			\pause
+		\item Por que essa solução \textcolor{red}{\textbf{não}} é ótima?
+			\pause
+		\item Complexidade de tempo: \textbf{$\mathcal{O}{(N*Q)}$}.
+			\pause
+		\item Quantidade de operacoes no pior caso: \textbf{$10^6 * 10^6 = 10^1^2$}.
+			\pause
+		\item Resultado: \textcolor{red}{\textbf{Time Limit Exceeded (TLE)}}.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Fundamento: queries estáticas de soma}
+	\framesubtitle{Ideia de solução 2: pré-computar todas as possíveis queries}
+
+	\begin{itemize}
+			\pause
+		\item \textcolor{structure}{Ideia:} Antes das queries, criar um map ou um vetor bidimensional que guarda a resposta pra query $(l, r)$.
+			\pause
+		\item preencher esse vetor com a resposta de cada uma dessa queries.
+			\pause
+		\item Por que essa solução \textcolor{red}{\textbf{não}} é ótima?
+			\pause
+		\item Quantas queries \textbf{distintas} podem ter?
+			\pause
+			\begin{itemize}
+				\item Melhor perguntando: quantos pares ordenados $(l, r)$, com $l$ e $r$ $(1 \leq l < r \leq N)$ existem?
+					\pause
+				\item $\frac{N * (N - 1)}{2}$ (uma quantidade quadrática).
+
+			\end{itemize}
+			\pause
+		\item Complexidade de tempo e espaço: \textbf{$\mathcal{O}{(N^2)}$}.
+			\pause
+		\item Quantidade de operacoes no pior caso: \textbf{$10^6 * 10^6 = 10^1^2$}.
+			\pause
+		\item Resultado: \textcolor{red}{\textbf{Time Limit Exceeded (TLE) ou MLE}}.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Fundamento: queries estáticas de soma}
+	\framesubtitle{Ideia de solução 3: Soma de Prefixo}
+
+
+	\begin{itemize}
+			\pause
+		\item \textcolor{structure}{Ideia:} Para cada query, buscamos o primeiro $i$ tal que $A_i \geq X$.
+			\pause
+		\item Começamos considerando todo o segmento \([1, N]\) como possível resposta.
+			\pause
+		\item Escolhemos o valor no meio do segmento e verificamos se ele é \(\geq X\).
+			\pause
+		\item Se for, ele pode ser uma resposta, mas ainda tentamos encontrar uma posição melhor à esquerda, olhando agora para $[1, meio]$.
+			\pause
+		\item Se não for, descartamos ele e toda a parte à esquerda, olhando agora para $(meio, N]$.
+			\pause
+		\item Repetimos até o sobrar só um valor. A posição final encontrada (se houver) é a menor com valor \(\geq X\).
+	\end{itemize} 
+\end{frame}
+
+
+
+\end{document}

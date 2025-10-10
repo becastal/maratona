@@ -1,0 +1,11 @@
+\frametitle{Tipos de Dados}
+        \begin{itemize}
+            \item Como declarar uma variável em C++?
+            \begin{itemize}
+                \item Especificando o tipo da variável seguido de seu nome.
+            \end{itemize}
+        \end{itemize}
+
+        \vfill
+
+        \lstinputlisting{tipos.cpp}

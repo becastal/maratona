@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define f first
+#define s second
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define endl '\n'
+#define dbg(x) cout << #x << " = " << x << endl
+#define all(x) (x).begin(), (x).end()
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+using namespace std;
+
+int solve() {
+	int n; cin >> n;
+
+	vector<string> A(n);
+	for (auto& i : A) cin >> i;
+
+	set<string> S;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (i == j) continue;
+			S.insert(A[i] + A[j]);
+		}
+	}
+	cout << S.size() << endl;
+
+	return(0);
+}
+
+int main()
+{
+    _;
+
+	int t = 1; //cin >> t;
+	while (t--) {
+		solve();
+	}
+    
+    return(0);
+}

@@ -16,9 +16,9 @@ complexidades:
 	merge: o(1/ackermann(n)) ~ 1;
 */
 
-struct DSU {
+struct Dsu {
 	vector<int> id, sz;
-	DSU(int n) : id(n), sz(n, 1) {
+	Dsu(int n) : id(n), sz(n, 1) {
 		iota(id.begin(), id.end(), 0);
 	}
 

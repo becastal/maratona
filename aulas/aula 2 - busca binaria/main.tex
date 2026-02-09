@@ -1,17 +1,22 @@
 \documentclass{beamer}
 \usetheme{Boadilla}
-\usepackage{tp} 
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-\usepackage{amsmath}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{tcolorbox}
+
 \title{Aula 2}
 \subtitle{Busca Binária}
 \author{Maratona de Programação}
 \institute{FEI}
 \date{\today}
-\setbeamertemplate{navigation symbols}{}
 
 \begin{document}
+
 \begin{frame}
 	\titlepage
 \end{frame}
@@ -22,11 +27,6 @@
 	\vspace{10pt}
 	\begin{center}
 		\textcolor{structure}{O valor X $(X \leq 10^9)$ está presente no vetor?}
-		\[
-		\sum_{i=1}^{\left\lfloor \frac{n}{2} \right\rfloor}
-		\sum_{j=i+1}^{\,n - i}
-		\left\lfloor \frac{n - i}{j} \right\rfloor
-		\]
 
 	\end{center}
 
@@ -45,7 +45,7 @@
 			\pause
 		\item Complexidade de tempo: \textbf{$\mathcal{O}{(N*Q)}$}.
 			\pause
-		\item Quantidade de operacoes no pior caso: \textbf{$10^6 * 10^6 = 10^1^2$}.
+		\item Quantidade de operacoes no pior caso: \textbf{$10^6 * 10^6 = 10^{12}$}.
 			\pause
 		\item Resultado: \textcolor{red}{\textbf{Time Limit Exceeded (TLE)}}.
 	\end{itemize}
@@ -125,7 +125,7 @@
 
 	\begin{itemize}
 			\pause
-		\item Complexidade de tempo: \textbf{$\mathcal{O}{(N + Q)}$} \pause \textcolor{darkgreen}{(OK)}.
+		\item Complexidade de tempo: \textbf{$\mathcal{O}{(N + Q)}$} \pause \textcolor{green}{(OK)}.
 			\pause
 		\item Complexidade de espaco: \textbf{$\mathcal{O}{(\max_{i = 1}^{n} A_i)}$}.
 			\pause
@@ -365,7 +365,7 @@
 \end{frame}
 
 \begin{frame}{Generalizando: \textbf{Monotonicidade}}
-	\textcolor{structure}{Exemplo: $\mathcol{f}{(x)} = \lfloor x \rfloor$}
+	\textcolor{structure}{Exemplo: $\mathcal{}{(x)} = \lfloor x \rfloor$}
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[ width=10cm, height=7cm, grid=both, xmin=0, xmax=10, ymin=0, ymax=10, domain=0:10, samples=21, axis lines=middle, xlabel={$x$}, ylabel={$f(x)$}, ]
@@ -376,7 +376,7 @@
 \end{frame}
 
 \begin{frame}{Generalizando: \textbf{Monotonicidade}}
-	\textcolor{structure}{Exemplo: $\mathcol{f}{(x)} = \frac{x(x - 1)}{2}$}
+	\textcolor{structure}{Exemplo: $\mathcal{f}{(x)} = \frac{x(x - 1)}{2}$}
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[ width=10cm, height=7cm, grid=both, xmin=0, xmax=10, ymin=0, ymax=50, domain=0:10, samples=200, axis lines=middle, xlabel={$x$}, ylabel={$f(x)$}, ]
@@ -387,7 +387,7 @@
 \end{frame}
 
 \begin{frame}{Generalizando: \textbf{Monotonicidade}}
-	\textcolor{structure}{Exemplo: $\mathcol{f}{(x)} = \max\left(1, \frac{(x - 5)^3}{3} + x\right) + 2(\lfloor \frac{x}{2} \rfloor)$}
+	\textcolor{structure}{Exemplo: $\mathcal{f}{(x)} = \max\left(1, \frac{(x - 5)^3}{3} + x\right) + 2(\lfloor \frac{x}{2} \rfloor)$}
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[ width=10cm, height=7cm, grid=both, xmin=0, xmax=8, ymin=0, ymax=20, domain=0:10, samples=300, axis lines=middle, xlabel={$x$}, ylabel={$f(x)$}, ]
@@ -413,8 +413,8 @@
 					]
 					Para qualquer problema de maratona, é possível achar:
 					\begin{itemize}
-						\item Primeiro ponto tal que $\mathcol{f}{(x)} \leq Y$ ou,
-						\item Último ponto tal que $\mathcol{f}{(x)} > Y$ ou,
+						\item Primeiro ponto tal que $\mathcal{f}{(x)} \leq Y$ ou,
+						\item Último ponto tal que $\mathcal{f}{(x)} > Y$ ou,
 						\item qualquer outra variação de condição que faça o vetor $R$ parecer com: $R = [0, 0, 0, 1, 1, 1, 1]$.
 					\end{itemize}
 				\end{tcolorbox}
@@ -425,9 +425,9 @@
 		\item A dificuldade dos problemas usualmente é:
 			\begin{itemize}
 					\pause
-				\item Notar que uma	$\mathcol{f}{(x)}$, útil para resolver o problema, é monotônica.
+				\item Notar que uma	$\mathcal{f}{(x)}$, útil para resolver o problema, é monotônica.
 					\pause
-				\item Achar um jeito esperto de computar $\mathcol{f}{(x)}$.
+				\item Achar um jeito esperto de computar $\mathcal{f}{(x)}$.
 			\end{itemize}
 
 	\end{itemize}

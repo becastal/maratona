@@ -1,0 +1,116 @@
+maratona/icpc/2025 ICPC Asia Taichung Regional Contest
+You’re *almost* on the right track — convex hull + checking certain lines is exactly the right geometric flavor — but your plan is missing an important family of cuts.
+
+Let me walk through it cleanly.
+
+---
+
+## 1. What we’re optimizing
+
+For a line at distance (d) from the center of the circle (perpendicular distance, (0 \le d \le r)), the area of the *smaller* piece of the cake is
+
+[
+A(d) = r^2 \arccos\left(\frac{d}{r}\right) - d \sqrt{r^2 - d^2}.
+]
+
+This function is strictly **decreasing** in (d) on ([0, r]):
+
+* (d = 0 \Rightarrow A = \frac{\pi r^2}{2}) (perfect half).
+* (d \to r \Rightarrow A \to 0).
+
+So:
+
+> **Maximizing the area of the smaller piece is exactly the same as minimizing the distance (d) from the center to the cutting line.**
+
+So the problem reduces to:
+
+> Find the minimal possible distance from the origin to a line that keeps all strawberries in one closed half-plane.
+
+---
+
+## 2. Two cases for the optimal line
+
+### Case A: There exists a line **through the origin** with all strawberries on one side
+
+Geometrically: all strawberry points lie inside some open half-plane bounded by a line through ((0,0)).
+
+Equivalent description: if you convert each strawberry to an angle (\theta_i = \text{atan2}(y_i, x_i)), then **all points fit inside some interval of length (\pi) (180°)** on the circle.
+
+If this is possible, we can choose that line as the cut:
+
+* Distance (d = 0).
+* Smaller piece area ( = \frac{\pi r^2}{2}).
+
+This is obviously optimal, since you can’t do better than a half-disk for the smaller piece.
+
+👉 **This is the case your current convex-hull-edge-only plan does *not* capture.**
+
+Concrete counterexample to your current idea:
+
+* Strawberries at ((1,1), (2,1), (1,2)) (all in the first quadrant).
+* There *is* a valid cut through the origin, e.g. the line (y = 0.5 x), with all strawberries on one side.
+* That gives (d = 0 \Rightarrow) smaller piece = half the cake.
+* But none of the hull edges pass through the origin, so checking only lines through edges would give some (d > 0) and a worse answer.
+
+So you **must explicitly check** whether a line through the origin can separate all strawberries to one side.
+
+A simple way:
+
+* Compute all angles (\theta_i).
+* Sort them, duplicate with +(2\pi), and use two pointers to see if you can cover all points with an interval of width (\le \pi).
+* If yes → answer is exactly (\frac{\pi r^2}{2}), and you’re done.
+
+---
+
+### Case B: No line through the origin can keep all strawberries on one side
+
+Then any line through the origin would have strawberries on both sides. In this case:
+
+* Geometrically, the origin lies *inside* the convex hull of the strawberries.
+* Any valid line that keeps all strawberries on one side must also keep the origin on the **same** side (you can’t separate the origin from a convex set that contains it with a single line).
+* So the origin is always in the “bigger” piece, and the smaller piece is the opposite cap of area (A(d)).
+
+In this situation, the optimal cut line is always a **supporting line** of the convex hull, i.e. a line tangent to the hull with all points on one side.
+
+And for a convex polygon:
+
+> The minimum distance from the origin to any supporting line is attained on a line that coincides with **some edge** of the convex hull.
+
+So **here your idea is correct**:
+
+1. Compute the convex hull of the strawberries: (P_1, \dots, P_k) in cyclic order.
+2. For each edge ((P_i,P_{i+1})) (with (P_{k+1} = P_1)):
+
+   * Compute the distance from the origin to the line through these two points:
+     [
+     d_i = \frac{|P_i \times P_{i+1}|}{|P_{i+1} - P_i|}
+     ]
+     where (P_i \times P_{i+1} = x_i y_{i+1} - y_i x_{i+1}).
+   * This is the minimal distance for that orientation while still keeping the whole hull on one side.
+3. Let (d^* = \min_i d_i).
+4. The answer is (A(d^*)) using the segment formula above.
+
+Complexity: convex hull in (O(n \log n)), scanning edges in (O(k)) → fine for (n \le 2 \cdot 10^5).
+
+---
+
+## 3. So, are you on the right track?
+
+**Yes, with one important fix:**
+
+* ✅ Using the convex hull and then only considering cuts along hull edges is correct **once** you know there’s *no* line through the origin that can keep all strawberries on one side.
+* ❌ But you’re missing the “line through the origin” case, where you can get a perfect half-disk and you don’t even need the hull.
+
+So the full solution sketch:
+
+1. Check if all strawberries fit inside some half-plane bounded by a line through the origin (angle / semicircle check).
+
+   * If yes → answer = (\frac{\pi r^2}{2}).
+2. Otherwise:
+
+   * Build convex hull.
+   * For each hull edge, compute (d_i).
+   * Let (d^*= \min d_i).
+   * Output (A(d^*) = r^2 \arccos(d^*/r) - d^* \sqrt{r^2 - d^{*2}}).
+
+If you adjust your plan to include step 1, you’re solid.

@@ -89,7 +89,7 @@ two pointers:
 greedy:
 [3]: https://codeforces.com/contest/1931/problem/B
 
-binary search:
+busca binaria:
 [2]: https://codeforces.com/contest/1619/problem/B
 [3]: https://atcoder.jp/contests/abc365/tasks/abc365_c
 [3]: https://atcoder.jp/contests/cf16-final/tasks/codefestival_2016_final_b
@@ -104,8 +104,5 @@ outros problemas maneiros:
 [5]: https://codeforces.com/contest/1931/problem/D
 [5]: https://atcoder.jp/contests/abc404/tasks/abc404_d
 [6]: https://codeforces.com/contest/1931/problem/E
+[6]: https://atcoder.jp/contests/arc208/tasks/arc208_b
 [7]: https://atcoder.jp/contests/abc374/tasks/abc374_d
-
-mostrar charles:
-o(nm) mais absurdo: https://codeforces.com/gym/101102/problem/D
-teste

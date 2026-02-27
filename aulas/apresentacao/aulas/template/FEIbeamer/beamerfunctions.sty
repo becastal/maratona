@@ -1,0 +1,564 @@
+% beamerfunctions package 
+% 
+% (c) Charles Ferreira 
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+% 
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamerfunctions}
+[2023/01/21 v0.01 LaTeX package for beamer presentation]
+
+
+\RequirePackage{pgfpages}
+\RequirePackage{pifont}
+\RequirePackage{mathabx}                   % better math visual
+\RequirePackage{xcolor}                    % add colors
+\RequirePackage{graphicx}                  % pictures managnment
+\RequirePackage[nomessages]{fp}            % enable calc
+\RequirePackage{booktabs}                  % better table visual
+\RequirePackage{xkeyval}                   % functions options
+\RequirePackage{tikz}                      % drawing functions
+\RequirePackage{ifthen}                    % if then functionality
+\RequirePackage{accsupp}                   % replace pdf text to another text
+\usetikzlibrary{calc}                      % calc function with tikz
+\usetikzlibrary{tikzmark, shapes.callouts} % callout drawing
+\RequirePackage{listings}    % code configuration 
+
+% system fonts definitions. 
+% Should be overriden by colorlet command
+\definecolor{light}{rgb}{0.04706, 0.13725, 0.26667} % 
+\definecolor{middle}{rgb}{0.04706, 0.13725, 0.26667} % 
+\definecolor{dark}{rgb}{0.04706, 0.13725, 0.26667} % 
+
+
+\newcommand{\vs}[1][0.2]{\vspace{#1cm}}                        % increase space between items
+\newcommand{\vp}[1][0.1]{\vspace{#1cm}}                        % increase space between items
+
+\newcommand{\cmark}{\textcolor{green!70!black}{\ding{51}}} % correct icon
+\newcommand{\xmark}{\textcolor{red}{\ding{55}}}           % wrong icon
+
+\newcommand{\crule}[3][gray]{\textcolor{#1}{\rule{#2}{#3}}}
+
+
+%---------------------------------
+% define an exercise counter
+\newcounter{exercisecounter}%
+\setcounter{exercisecounter}{0}% 
+
+\define@key{exercise}{keep}[empty]{%
+    \addtocounter{exercisecounter}{-1}%
+}
+
+\newcommand{\exercise}[1][]{%
+    \setkeys{exercise}{#1}%
+    \addtocounter{exercisecounter}{1}%
+    Exercício \theexercisecounter%
+}
+
+% shortcut to increment and show the exercise counter
+\newcommand{\nex}{%
+    \addtocounter{exercisecounter}{1}%
+    \theexercisecounter%
+}
+%----------------------------------
+
+
+% apply bold on both math an text objects
+\newcommand\allbold[1]{{\boldmath\textbf{#1}}}
+
+% avoid increment exercise counter in frame overlay generation
+\resetcounteronoverlays{exercisecounter}
+
+% add a layer of invisibility into slides hidden by pause command(default)
+\newcommand{\notransparent}{\setbeamercovered{invisible}}
+% add a layer of transparency into slides hidden by pause command
+\newcommand{\transparent}{\setbeamercovered{highly dynamic}}
+
+
+% ---------- double columns command definition ------------------------------------
+% create two columns with adjustable size. The informed parameter will be used
+% to define a percetage of the page used by the first column.
+% The remaining size will be filled by the second column
+\newcommand{\doublecolumn}[3][0.5]{% 
+    \begin{columns}[onlytextwidth,T]
+        \FPeval{\result}{clip(1.0-#1)}
+        \begin{column}{#1\textwidth}
+            \setlength{\parskip}{\baselineskip}
+            #2
+        \end{column}
+        \begin{column}{\result\textwidth}
+            \setlength{\parskip}{\baselineskip}
+            #3
+        \end{column}
+    \end{columns}
+}
+%------------------------------------------------------------------------------
+
+
+% -------- triplecolumn command definition ----------------------------------
+% create three columns with fixed size
+\newcommand{\triplecolumn}[3]{%
+    \begin{columns}[onlytextwidth,T]
+        \begin{column}{0.33\textwidth}
+            \setlength{\parskip}{\baselineskip}
+            #1
+        \end{column}
+        \begin{column}{0.33\textwidth} 
+            \setlength{\parskip}{\baselineskip}
+            #2
+        \end{column}
+        \begin{column}{0.33\textwidth}
+            \setlength{\parskip}{\baselineskip}
+            #3
+        \end{column}
+    \end{columns}
+}
+%------------------------------------------------------------------------------
+
+
+%----- code command definition --------------------------------------------------
+\newcommand{\CEsize}{1.0}
+\define@key{code}{size}{%
+    \renewcommand{\CEsize}{#1}
+}
+\newcommand{\CEspace}{0.6}
+\define@key{code}{space}{%
+    \renewcommand{\CEspace}{#1cm}
+}
+\newcommand{\CEtitle}{Código}
+\define@key{code}{title}{%
+    \renewcommand{\CEtitle}{#1}
+}
+\newcommand{\code}[2][]{%
+    \setkeys{code}{title=,size=1.0,space=0.0,#1}
+    \doublecolumn[0.99]{%
+        \vspace{-0.5cm}
+        {\footnotesize \textbf{\CEtitle}}
+        \resizebox{\CEsize\columnwidth}{!}{\makebox[\columnwidth][l]{%
+                \hspace{\CEspace}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting{#2}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        % empty second column
+    }
+}
+%------------------------------------------------------------------------------
+
+
+%----- inlinecode command definition --------------------------------------------------
+\newcommand{\INsize}{1.0}
+\define@key{inlinecode}{size}{%
+    \renewcommand{\INsize}{#1}
+}
+\newcommand{\INspace}{0.6}
+\define@key{inlinecode}{space}{%
+    \renewcommand{\INspace}{#1cm}
+}
+\newcommand{\inlinecode}[2][]{%
+    \setkeys{inlinecode}{size=1.0,space=0.0,#1}%
+    % \doublecolumn[0.99]{%
+    %   \resizebox{\INsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+    %       \hspace{\INspace}
+    %       \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+    %       \lstinline{#2}
+    %       \EndAccSupp{}
+    %   }}
+    % }{% ---------
+    %   % empty second column
+    % }
+    \lstset{basicstyle=\normalsize\ttfamily\color{gray!70!black}}%
+    \lstinline|#2|
+}
+%------------------------------------------------------------------------------
+
+
+%----- doublecode command definition ------------------------------------------
+\newcommand{\DCsize}{1.0}
+\define@key{doublecode}{size}{%
+    \renewcommand{\DCsize}{#1}
+}
+\newcommand{\DCspace}{0.6}
+\define@key{doublecode}{space}{%
+    \renewcommand{\DCspace}{#1cm}
+}
+\newcommand{\DCcolumn}{0.5}
+\define@key{doublecode}{column}{%
+    \renewcommand{\DCcolumn}{#1}
+}
+\newcommand{\DClefttext}{}
+\define@key{doublecode}{lefttext}{%
+    \renewcommand{\DClefttext}{#1}
+}
+\newcommand{\DCrighttext}{}
+\define@key{doublecode}{righttext}{%
+    \renewcommand{\DCrighttext}{#1}
+}
+\newcommand{\doublecode}[3][]{%
+    \setkeys{doublecode}{lefttext=,righttext=,size=1.0,space=0.0,column=0.5,#1}
+    \doublecolumn[\DCcolumn]{%
+        {\footnotesize \textbf{\DClefttext}}
+        \resizebox{\DCsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{\DCspace}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting{#2}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        {\footnotesize \textbf{\DCrighttext}}
+        \resizebox{\DCsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{\DCspace}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting{#3}
+                \EndAccSupp{}
+        }}
+    }
+}
+%------------------------------------------------------------------------------
+
+
+
+%----- splitcodethree command definition --------------------------------------
+\newcommand{\SCTsize}{1.0}
+\define@key{splitcodethree}{size}{%
+    \renewcommand{\SCTsize}{#1}
+}
+
+\newcommand{\SCTtitle}{Código}
+\define@key{splitcodethree}{title}{%
+    \renewcommand{\SCTtitle}{#1}
+}
+\newcommand{\splitcodethree}[4][]{%
+    \setkeys{splitcodethree}{size=1.0,title=,#1}
+    \triplecolumn{%
+        {\footnotesize \textbf{\SCTtitle}}
+        \resizebox{\SCTsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[lastline=#2]{#4}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        \resizebox{\SCTsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \FPeval{\firstSplit}{clip(1+#2)}
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[firstline=\firstSplit,firstnumber=\firstSplit,lastline=#3]{#4}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        \resizebox{\SCTsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \FPeval{\secondSplit}{clip(1+#3)}
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[firstline=\secondSplit,firstnumber=\secondSplit]{#4}
+                \EndAccSupp{}
+        }}
+    }
+}
+%------------------------------------------------------------------------------
+
+
+%----- splitcode command definition -------------------------------------------
+\newcommand{\SCsize}{1.0}
+\define@key{splitcode}{size}{%
+    \renewcommand{\SCsize}{#1}
+}
+\newcommand{\SCcolumn}{0.5}
+\define@key{splitcode}{column}{%
+    \renewcommand{\SCcolumn}{#1}
+}
+\newcommand{\SCtitle}{Código}
+\define@key{splitcode}{title}{%
+    \renewcommand{\SCtitle}{#1}
+}
+\newcommand{\SCspace}{Código}
+\define@key{splitcode}{space}{%
+    \renewcommand{\SCspace}{#1}
+}
+\newcommand{\splitcode}[3][]{%
+    \setkeys{splitcode}{space=0.0,title=,size=1.0,column=0.5,#1}
+    \doublecolumn[\SCcolumn]{%
+        \vspace{-0.5cm}
+        {\footnotesize \textbf{\SCtitle}}\par%
+        \resizebox{\SCsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{\SCspace cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[lastline=#2]{#3}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        \resizebox{\SCsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \FPeval{\nextLine}{clip(1+#2)}
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[firstline=\nextLine,firstnumber=\nextLine]{#3}
+                \EndAccSupp{}
+        }}
+    }
+}
+%------------------------------------------------------------------------------
+
+
+%----- slicecode command definition -------------------------------------------
+\newcommand{\SLsize}{1.0}
+\define@key{slicecode}{size}{%
+    \renewcommand{\SLsize}{#1}
+}
+\newcommand{\SLfirstline}{1}
+\define@key{slicecode}{firstline}{%
+    \renewcommand{\SLfirstline}{#1}
+}
+\newcommand{\SLlastline}{1}
+\define@key{slicecode}{lastline}{%
+    \renewcommand{\SLlastline}{#1}
+}
+\newcommand{\SLtitle}{Código}
+\define@key{slicecode}{title}{%
+    \renewcommand{\SLtitle}{#1}
+}
+\newcommand{\slicecode}[2][]{%
+    \setkeys{slicecode}{title=,firstline=1,lastline=1,size=1.0,#1}
+    \doublecolumn[0.99]{%
+        \vspace{-0.5cm}
+        {\footnotesize \textbf{\SLtitle}}
+        \resizebox{\SLsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting[firstline=\SLfirstline,firstnumber=\SLfirstline,lastline=\SLlastline]{#2}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        % empty
+    }
+}
+%------------------------------------------------------------------------------
+
+%---- coderun command definition (begin) ----------------------------------------------
+\newcommand{\CRsize}{1.0}
+\define@key{coderun}{size}{%
+    \renewcommand{\CRsize}{#1}
+}
+\newcommand{\CRcolumn}{0.5}
+\define@key{coderun}{column}{%
+    \renewcommand{\CRcolumn}{#1}
+}
+\newcommand{\CRlefttext}{Classe com método main}
+\define@key{coderun}{lefttext}{%
+    \renewcommand{\CRlefttext}{#1}
+}
+\newcommand{\CRrighttext}{Saída esperada}
+\define@key{coderun}{righttext}{%
+    \renewcommand{\CRrighttext}{#1}
+}
+\newcommand{\coderun}[3][]{%
+    \setkeys{coderun}{size=1.0,column=0.5,lefttext=Código,righttext=Saída esperada,#1}
+    \doublecolumn[\CRcolumn]{%
+        {\footnotesize \textbf{\CRlefttext}}\\%\vskip 0.0cm
+        \resizebox{\CRsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting{#2}
+                \EndAccSupp{}
+        }}
+    }{% ---------
+        {\footnotesize \textbf{\CRrighttext}}\\%\vskip 0.0cm
+        \resizebox{\CRsize\columnwidth}{!}{\makebox[\columnwidth][l]{
+                %\lstset{numbers=none,language={},literate=}
+                \lstset{numbers=none,language={}}
+                \hspace{0.0cm}
+                \BeginAccSupp{ActualText=Do not copy! Code with your own hands and learn with it :).}
+                \lstinputlisting{#3}
+                \EndAccSupp{}
+        }}
+    }
+}
+%-----coderun command definition (end)------------------------------------
+
+
+%-----grid command definition (begin)------------------------------------
+\newcommand{\grid}{
+    \tikz[overlay, remember picture, help lines]{
+        \foreach \x in {0,...,18} \path (current page.south west) +(\x,0.2) node {\textcolor{cyan!70}{\small$\x$}};
+        \foreach \y in {0,...,9} \path (current page.south west) +(0.10,\y) node {\textcolor{cyan!70}{\small$\y$}};
+        \foreach \x in {0,0.5,...,18.5} \draw[cyan!30] (current page.south west) ++(\x,0) -- +(0,9.6);
+        \foreach \y in {0,0.5,...,9.5} \draw[cyan!30] (current page.south west) ++(0,\y) -- +(18.8,0);
+    }
+}
+%-----grid command definition (end)------------------------------------
+
+
+
+%----- floatnode command definition (begin)-------------------------------------------
+\newcommand{\FNxpos}{8.0}
+\newcommand{\FNypos}{4.0}
+\newcommand{\FNnodealign}{left}
+\newcommand{\FNfont}{\footnotesize}
+\newcommand{\FNanchor}{anchor}
+
+\define@boolkey{floatnode}{grid}{
+    \tikz[overlay, remember picture, help lines]{
+        \foreach \x in {0,...,18} \path (current page.south west) +(\x,0.2) node {\textcolor{cyan!70}{\small$\x$}};
+        \foreach \y in {0,...,9} \path (current page.south west) +(0.10,\y) node {\textcolor{cyan!70}{\small$\y$}};
+        \foreach \x in {0,0.5,...,18.5} \draw[cyan!30] (current page.south west) ++(\x,0) -- +(0,9.6);
+        \foreach \y in {0,0.5,...,9.5} \draw[cyan!30] (current page.south west) ++(0,\y) -- +(18.8,0);
+    }
+}
+\define@key{floatnode}{x}{%
+    \renewcommand{\FNxpos}{#1}
+}
+\define@key{floatnode}{y}{%
+    \renewcommand{\FNypos}{#1}
+}
+\define@key{floatnode}{align}{%
+    \renewcommand{\FNnodealign}{#1}
+}
+\define@choicekey{floatnode}{font}{\tiny,\scriptsize,\footnotesize,\small,\normalsize,\large,\Large,\LARGE,\huge,\Huge}{%
+    \renewcommand{\FNfont}{#1}
+}
+\define@key{floatnode}{anchor}{%
+    \renewcommand{\FNanchor}{#1}
+}
+\newcommand{\floatnode}[2][]{%
+    \setkeys{floatnode}{font=\footnotesize,anchor=center,x=8.0,y=4.0,align=left,#1}%
+    \tikz[remember picture,overlay]\node[font=\FNfont,anchor=\FNanchor,align=\FNnodealign]at ($(current page.south west)+(\FNxpos, \FNypos)$) {#2};%
+}
+%------floatnode command definition (end)-----------------------------------------------
+
+
+%TODO finis adding textwidth to balloon
+%----- balloon command definition (begin) ----------------------------------------------
+\newcounter{ballooncounter}
+\setcounter{ballooncounter}{0}% 
+
+\newcommand{\BLxshift}{1.0cm}
+\newcommand{\BLyshift}{1.0cm}
+\newcommand{\BLfollow}{BLempty}
+\newcommand{\BLx}{1.0cm}
+\newcommand{\BLy}{1.0cm}
+\newcommand{\BLfont}{\footnotesize}
+\newcommand{\BLtextalign}{center}
+\newcommand{\BLtextwidth}{0}
+
+\define@key{balloon}{xshift}{%
+    \renewcommand{\BLxshift}{#1cm}
+}
+\define@key{balloon}{yshift}{%
+    \renewcommand{\BLyshift}{#1cm}
+}
+\define@key{balloon}{follow}{%
+    \renewcommand{\BLfollow}{#1}
+}
+\define@key{balloon}{x}{%
+    \renewcommand{\BLx}{#1}
+}
+\define@key{balloon}{y}{%
+    \renewcommand{\BLy}{#1}
+}
+\define@choicekey{balloon}{font}{\tiny,\scriptsize,\footnotesize,\small,\normalsize,\large,\Large,\LARGE,\huge,\Huge}{%
+    \renewcommand{\BLfont}{#1}
+}
+\define@key{balloon}{align}{%
+    \renewcommand{\BLtextalign}{#1}
+}
+\define@key{balloon}{textwidth}{%
+    \renewcommand{\BLtextwidth}{#1}
+}
+\newcommand{\balloon}[2][]{%
+    \addtocounter{ballooncounter}{1}%
+    \setkeys{balloon}{align=center,font=\footnotesize,xshift=1.0,yshift=1.0,x=8,y=4,follow=BLempty,#1}%
+    \ifthenelse{\equal{\BLfollow}{BLempty}}%
+    {\renewcommand{\BLfollow}{BL\theballooncounter}\floatnode[x=\BLx,y=\BLy]{\tikzmark{\BLfollow}}}%
+    {}%
+    \ifthenelse{\equal{\BLtextwidth}{0}}{%
+        \tikzstyle{balloon}=[rectangle callout,rounded corners,]
+    }
+    {%
+        \tikzstyle{balloon}=[rectangle callout,rounded corners,text width=\BLtextwidth cm]
+    }
+    \begin{tikzpicture}[overlay, remember picture]%
+        \node[balloon,align=\BLtextalign,font=\BLfont,%
+        callout absolute pointer={(pic cs:\BLfollow)},%
+        draw] at ([xshift=\BLxshift,yshift=\BLyshift]pic cs:\BLfollow){#2};
+    \end{tikzpicture}
+}
+%----- balloon command definition (end) ----------------------------------------------
+
+
+%%%%%% Question command definition ---------------
+\newcommand{\QTsize}{0.1}
+\define@key{question}{size}{%
+    \renewcommand{\QTsize}{#1}
+}
+\newcommand{\QTcolor}{black}
+\define@key{question}{color}{%
+    \renewcommand{\QTcolor}{#1}
+}
+\newcommand{\QTfont}{\Large}
+\define@choicekey{question}{font}{\tiny,\scriptsize,\footnotesize,\small,\normalsize,\large,\Large,\LARGE,\huge,\Huge}{%
+    \renewcommand{\QTfont}{#1}
+}
+\newcommand{\question}[2][]{%
+    \setkeys{question}{font=\Large,size=0.08,color=black,#1}
+    \begin{center}
+        \QTfont#2
+
+        \resizebox{\QTsize\textwidth}{!}{\textcolor{\QTcolor}{?}}
+    \end{center}
+}
+%%% ----------------------------------------------
+
+% like center environment but without extra vertical space
+\newcommand{\centralize}[1]{
+    \begingroup 
+    \centering
+    #1\par
+    \endgroup
+}
+
+
+%----------------------------------------------------------------
+% a few shortcuts in order to help typing complicated math symbols
+% these shortucuts are not necessary in order to use this template
+% and can be safely removed if one do not desire them
+\newcommand{\llm}{\underset{lm}{{\Rightarrow}}}
+\newcommand{\lm}{\underset{lm}{\overset{*}{\Rightarrow}}}
+\newcommand{\rrmm}{\underset{rm}{{\Rightarrow}}}
+\newcommand{\rrm}{\underset{rm}{\overset{*}{\Rightarrow}}}
+% \newcommand{\raw}{\ensuremath{\rightarrow{}}}
+\newcommand{\braw}{\Rightarrow}
+\newcommand{\al}{\ensuremath{\alpha}}
+\newcommand{\bt}{\ensuremath{\beta}}
+\newcommand{\gdot}{\text{\textcolor{FEImiddleblue}{\textbullet}}}
+\newcommand{\dl}{\delta}
+\newcommand{\hdl}{\hat{\delta}}
+\newcommand{\ep}{\ensuremath{\boldsymbol\varepsilon{}}}
+\newcommand{\ey}{\emptyset}
+\newcommand{\ds}{\textendash{}}
+\newcommand{\cec}[1]{\cellcolor{middle}{#1}}
+\newcommand{\memph}[1]{$\boldsymbol{\textcolor{light}{#1}}$}
+%------------------------------------------------------------------
+
+% horizontal line to separate code in the same slide
+\newcommand{\codeseparator}{
+    \vspace{-0.9cm}
+    \hrulefill
+    \vspace{-0.2cm}
+}
+
+% make any text bold, following system fonts and work with beamer overlay
+\newcommand<>{\textgf}[1]{\textbf#2{\textcolor#2{middle}{#1}}}
+
+
+% make any text bold and red work with beamer overlay
+\newcommand<>{\textrd}[1]{\textbf#2{\textcolor#2{red}{#1}}}
+
+% draw an arrow at the bottom right of the page to indicate there is sequential content in the next page
+\newcommand{\continue}{\floatnode[x=15,y=1]{\tikz\node[single arrow,fill=light,text=white]{continua};}}
+
+\endinput
+%%
+%% End of file `beamerfunction.sty'.

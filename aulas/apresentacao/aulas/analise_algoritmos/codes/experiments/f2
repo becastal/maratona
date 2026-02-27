@@ -1,0 +1,21 @@
+#!/bin/python3
+
+def QuickSort(V, p,r):
+    if p < r:
+        q = particiona(V, p, r)
+        QuickSort(V, p, q-1)
+        QuickSort(V, q+1, r)
+
+def particiona(V, p, r):
+    x = V[r]
+    i = p-1
+    for j in range(p, r):
+        if V[j] <= x:
+            i = i + 1
+            V[i], V[j] = V[j], V[i]
+    V[i+1], V[r] = V[r], V[i+1]
+    return i+1
+    
+numbers = [int(x) for x in input().split()]
+QuickSort(numbers,0, len(numbers)-1)
+print(numbers)

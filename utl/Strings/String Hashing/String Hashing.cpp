@@ -17,7 +17,7 @@ int uniform(int l, int r) {
 template<int MOD> struct str_hash {
 	static int P;
 	vector<ll> h, p;
-	str_hash(string s) : h(s.size()), p(s.size()) {
+	str_hash(string s) : h(s.size()), p(s.size() + 1) {
 		p[0] = 1, h[0] = s[0];
 		for (int i = 1; i < s.size(); i++)
 			p[i] = p[i - 1]*P%MOD, h[i] = (h[i - 1]*P + s[i])%MOD;

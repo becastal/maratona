@@ -1,0 +1,122 @@
+\mode<presentation>
+
+\setbeamertemplate{navigation symbols}{} % remove navigation symbols
+\setbeamertemplate{frametitle}[default][left]
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{itemize subitem}{--}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+
+% define title page layout
+\setbeamertemplate{title page}
+{%
+  % \setbeamercolor{background canvas}{bg=ANIMAdarkgreen}
+  % \setbeamercolor{background canvas}{bg=FEIdarkblue}
+  \setbeamercolor{background canvas}{bg=FEIlightblue}
+  \begin{frame}[plain] % plain causes the headline, footline and sidebars to be suppressed
+
+    % \fimage{-5.0}{-0.4}{\includegraphics[scale=0.68]{FEI_logo_2015.png}}
+    \floatnode[x=14.2,y=7.5]{\includegraphics[scale=0.30]{FEI_logo_2015.png}}
+
+    \begin{columns}[onlytextwidth,T]
+      \begin{column}{.12\linewidth}
+        % empty left space
+      \end{column}
+      \begin{column}{.88\linewidth}
+        \parbox[c][0.55\paperheight][b]{1.0\columnwidth}
+        {%
+          {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+        }
+        \parbox[c][0.15\paperheight][c]{1.0\columnwidth}{%
+          {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle}%
+        }
+        \parbox[t][0.15\paperheight][c]{1.0\columnwidth}
+        {%
+          \usebeamercolor[fg]{author}
+          \insertauthor\\
+          \insertshortauthor%
+        }
+      \end{column}
+    \end{columns}
+  \end{frame}
+}
+
+% define end page layout
+\setbeamertemplate{endpage}
+{%
+  % \setbeamercolor{background canvas}{bg=ANIMAdarkgreen}
+  \setbeamercolor{background canvas}{bg=FEIlightblue}
+  \begin{frame}[plain]
+    \parbox[c][0.55\paperheight][b]{1.0\columnwidth}
+    {%
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}Obrigado}
+    }
+    \parbox[c][0.27\paperheight][c]{1.0\columnwidth}{%
+      {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertshortauthor}%
+    }
+  \end{frame}
+}
+
+
+% insert titlepage as the first page
+\AtBeginDocument{\ifthenelse{\boolean{hascover}}{\titlepage}{}}
+% insert endpage as the last page 
+\AtEndDocument{\ifthenelse{\boolean{hascover}}{\usebeamertemplate{endpage}}{}}
+
+
+% at each \section command
+% create a frame within the 
+% section content centralized 
+\AtBeginSection{%
+% \setbeamersize{text margin left=1em, text margin right=1em}
+  \begin{frame}[plain]
+    % \fimage{-5.0}{0.0}{\includegraphics[scale=0.25]{backfei2.jpeg}}
+    \floatnode[x=2,y=4.5]{\includegraphics[scale=0.25]{backfei2.jpeg}}
+    % % \fimage{-5.0}{0.0}{\includegraphics[scale=0.4]{background_section.png}}
+    % % \fimage{-3.6}{0.8}{\includegraphics[scale=0.65]{background_section2.png}}
+    % \begin{columns}
+    %   \begin{column}{0.40\paperwidth}
+    %     % \setbeamercolor{background canvas}{bg=FEIlightblue}
+    %     \parbox[c][0.30\paperheight][b]{1.0\columnwidth} {}
+    %     \parbox[c][0.30\paperheight][b]{1.0\columnwidth}
+    %     {%
+    %       {\usebeamercolor[fg]{title}\rtndfamily\inserttitle} 
+    %     }
+    %   \end{column}
+    %   \begin{column}{0.50\paperwidth}
+    %     \centering
+    %     {\Large\insertsectionhead}
+    %   \end{column}
+    % \end{columns} 
+    \colorbox{FEIlightblue}{\begin{minipage}[c][1.0\paperheight][c]
+        % {\dimexpr0.5\textwidth-2\fboxsep-2\fboxrule-5pt\relax}
+        {\dimexpr0.5\textwidth-2\fboxsep-2\fboxrule-5pt\relax}
+        % \parbox[c][0.00\paperheight][b]{1.0\columnwidth} {aa}
+        \parbox[c][0.60\paperheight][b]{1.0\columnwidth}
+        {%
+          {\usebeamercolor[fg]{title}\righthyphenmin=62\Large\bsifamily\inserttitle} 
+        }
+    \end{minipage}}\hfill
+    \begin{minipage}[c][1.0\textheight][c]
+      {\dimexpr0.5\textwidth-5pt\relax}
+      \centering
+      {\Large\insertsectionhead}
+    \end{minipage}
+  \end{frame}
+}
+
+% define note page layout
+\setbeamertemplate{note page}{%
+  \floatnode[y=4]{\crule[notegray]{16cm}{10cm}}%
+  \floatnode[x=8, y=8]{\crule[lightgray]{16cm}{2.25cm}}%
+  \floatnode[font=\large,x=1,y=8,anchor=west]{Notas e Soluções}%
+  \floatnode[x=14, y=8]{\insertslideintonotes{0.25}}%
+  \floatnode[x=1, y=7.1,align=left,anchor=west]{\inserttitle}%
+  \vspace{1.7cm}%
+  \par
+  \insertnote%
+  % \grid
+}
+
+\mode%
+<all>

@@ -1,7 +1,6 @@
-# Local session/tooling state
-.codex
 
 # Editor swap and backup files
+.codex
 *.swp
 *.swo
 *.swn

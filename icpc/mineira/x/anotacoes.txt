@@ -1,0 +1,77 @@
+maratona mineira x (2023)
+
+a: [2] (Elemento X): sei la. o ale fez.
+
+b: [1] (Contorno): um pouco de grafo.
+
+	A intuicao tava indo num caminho decente, especialmente em notar que o problme se resumia em decidir se cada
+	conexao tinha que passar por dentrou ou por fora, e que nao poderia ter nenhum conflito nessa configuracao. 
+	Eu so nao conhecia esse grafo de "conflitos". a ideia eh ligar todas as arestas do grafo, sendo que cada
+	aresta eh um possivel conflito, e tentar pintar esse grafo com somente duas cores (ver se bipartido).
+
+c: [0] (Dever de Casa): teoria dos numeros.
+
+	Por algum motivo ninguem quis encarar, mas sinto que era resolvivel ja que nao tinha nenhum conteudo que a
+	gente nao olhou no passado. 
+	Para que uma divisao seja uma dizima periodica, eh facil observar que basta o denominador ter um primo que
+	nao divide a base. entao era so achar todos os primos unicos que dividiam cada um dos denominadores e 
+	multiplicar eles todos.
+
+d: [2] (Adedanha): sei la. o ale fez.
+
+e: [1] (Problema do Sapo): adhoc.
+
+	Dava pra ter feito. Nao li direito e fiquei com a cabeca pensando que era um problema diferente.
+	Era ter notado que o caminho muito provavelmente seguiria por buscar o min(xi, yi).
+	Dai tu notava que casos que isso nao era possivel eram raros e faceis de tratar. Nada demais.
+	
+f: [1] (14-bis): dois ponteiros.
+
+	Eu sabia e era bem tranquilo. Por algum motivo apanhei na execucao e nao consegui Implementar. Raiva absurda.
+	Sem mais comentarios.
+
+g: [2] (Jogo dos Copos): sei la. o albertini fez.
+
+h: [0] (Tenet): string, bitmask.
+
+	Um problema de palindromo que simplifica pra um problema de bitmask. Maneiro, mas nao dava mesmo nao.
+
+i: [0] (O Andar do Trebado): combinatoria.
+
+	Achavamos que era um problema de dp e um esforco consideravel foi colocado aqui, mas na verdade coisa demais
+	pra computar em uma dp e mesmo se nao apanhassemos na implementacao teriamos tomado tle.
+	Era na verdade um problema de combinatoria.
+
+j: [1] (O Desfile das K-peias): dp.
+
+	Eu sabia, todos sabiamos. uma variacao de knapsack maneira, mas nao notei no detalhe de nao ter que levar
+	tanta coisa de um estado pro outro. Apanhando de novo na implementacao.
+
+k: [1] (Baloes da Maratona): adhoc.
+
+	Eu verbalizei pro albertini que era so brutar. Calculei os numeros e mostrei pra mim mesmo que era so brutar,
+	e mesmo assim nao codei. Sei la. Muito burro.
+
+l: [0] (Bacon e a Arvore Magica): hld.
+
+	Nao dava mesmo. Achei que era uma variacao bizarra de segtree com arvore e descobri que isso existe e que hld
+	resolve justamente isso. O problema nao era so uma query em um range mas sim em uma arvore, e pra isso que hld
+	resolve. Vou dar uma olhada eventualmente, mas ainda ando ruim em range query padrao.
+
+m: [2] (Tres, Quatro, Cinco): geometria.
+
+	Suave. Mm problema de geometria padrao de ensino medio mas com um pouco de computacao.
+
+n: [0] (Trapaca na Pastelaria): nim, fft.
+
+	Bizarro. (to evitando usar essa palavra, mas serve muito pra esse).
+	Bem absurdo. era um problema de nim (teoria dos jogos). tu tinha que achar um tal de grunge number de cada
+	posicao de cada tabuleiro e jogar eles num vetor de frequencia. dai, com esses vetores computados pra cada
+	tabuleiro, tu fazia a convolucao deles com uma variacao bizarra de xor com fft e achava o resultado. sei la.
+	Pra ter ideia, eles chamaram a parte da fft (inclusive a de achar o polinomio e tal) como a parte simples e
+	tranquila do problema. A dificuldade real era achar esses grunge number de um jeito esperto ja que n*m podia
+	ser 1e5.
+	Pra isso, eles usaram uma tal de sqrt decompositoin pra conseguir fazer: add/rem em o(1) e max em o(sqrt(n*m))
+
+
+total: 4 feitas, 5 no talvez e 4 que nao fariamos nem com +1dia no relogio.

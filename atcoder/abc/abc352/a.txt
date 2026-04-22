@@ -1,0 +1,46 @@
+// swag (sliding-window aggregate)
+//
+// o(1) amortizado pra manter uma queue com os valores
+// de uma janela.
+// serve pra qualquer operacao que seja assossiativa ,
+// que tenha um identidade, e que nao tenha inverso.
+// (se tiver inverso facil nao precisa codar isso)
+//
+// op() tem que ser a operacao.
+// e() tem que ser a identidade.
+// declara assim: swag<int, 
+//					[](int a, int b) { return min(a, b); }
+//					[]() { return INF; }> swag_min;
+
+template<typename T, auto op, auto e>
+struct swag {
+	stack<array<T, 2>> in, out;
+
+	void push(T x) {
+		T agg = in.empty() ? x : op(in.top()[1], x);
+		in.push({x, agg});
+	}
+
+	void pop() {
+		if (out.empty()) {
+			while (!in.empty()) {
+				auto [x, agg] = in.top();
+				in.pop();
+
+				T cur = out.empty() ? x : op(x, out.top()[1]);
+				out.push({x, cur});
+			}
+		}
+		out.pop();
+	}
+
+	T query() {
+		if (in.empty() and out.empty()) return e();
+		if (in.empty()) return out.top()[1];
+		if (out.empty()) return in.top()[1];
+		return op(out.top()[1], in.top()[1]);
+	}
+
+	int size() { return (int)in.size() + (int)out.size(); }
+	bool empty() { return in.empty() and out.empty(); }
+};

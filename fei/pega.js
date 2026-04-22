@@ -1,6 +1,5 @@
 res = "";
-document.querySelectorAll('#table td.large a').forEach(a => {
+document.querySelectorAll('.pg-vertical a').forEach(a => {
   // res += '=HIPERLINK(\"' + a.href + '\"; \"' + a.textContent + '\")\n';
-  res += a.ref + '\n'
+  res += a.href + '\n'
 });
-console.log(res);

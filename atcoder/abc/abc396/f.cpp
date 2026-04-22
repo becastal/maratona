@@ -1,52 +1,79 @@
 #include <bits/stdc++.h>
-#define f first
-#define s second
 #define _ ios_base::sync_with_stdio(0);cin.tie(0);
 #define endl '\n'
-#define dbg(x) cout << #x << " = " << x << endl
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
 typedef long long ll;
-const int INF = 0x3f3f3f3f;
-const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
+#define int ll
 
-template<typename T> ll inv_count(vector<T> l, vector<T> r = {}) {
-	if (!r.size()) {
-		r = l;
-		sort(r.begin(), r.end());
+struct Bit {
+	int n;
+	vector<int> F;
+	Bit (int n_) : n(n_), F(n + 1) { }
+	void update(int i, int x) {
+		for (i++; i <= n; i+=i&-i) {
+			F[i] += x;
+		}
 	}
-	int n = l.size();
-	vector<int> v(n), bit(n);
-	vector<pair<T, int>> w;
-	for (int i = 0; i < n; i++) w.push_back({r[i], i+1});
-	sort(w.begin(), w.end());
+
+	int pref(int i) {
+		if (i < 0) return 0;
+		int res = 0;
+		for (i++; i; i-=i&-i) {
+			res += F[i];
+		}
+		return res;
+	}
+};
+
+
+int solve() {
+	int n, m; cin >> n >> m;
+	vector<int> A(n);
+	vector<vector<int>> O(m+1);
 	for (int i = 0; i < n; i++) {
-		auto it = lower_bound(w.begin(), w.end(), make_pair(l[i], 0));
-		if (it == w.end() or it->first != l[i]) return -1; // nao da
-		v[i] = it->second;
-		it->second = -1;
+		cin >> A[i];
+		O[A[i]].push_back(i);
 	}
 
-	ll ans = 0;
-	for (int i = n-1; i >= 0; i--) {
-		for (int j = v[i]-1; j; j -= j&-j) ans += bit[j];
-		for (int j = v[i]; j < n; j += j&-j) bit[j]++;
+	vector<int> L(n), R(n);
+	Bit bita(m), bitb(m);
+	for (int i = 0; i < n; i++) {
+		L[i] = bita.pref(A[i] - 1);
+		bita.update(A[i], +1);
 	}
-	return ans;
+
+	int res = 0;
+	for (int i = n-1; i >= 0; i--) {
+		res += (R[i] = bitb.pref(A[i] - 1));
+		bitb.update(A[i], +1);
+	}
+
+	for (int i = 0; i < n; i++) {
+		cout << i << ", L[i]: " << L[i] << ", R[i]:" << R[i] << endl;
+	}
+
+	for (int k = 0; k < m; k++) {
+		for (int i : O[m - k]) {
+			res += L[i];
+			res -= R[i];
+		}
+		cout << res << endl;
+	}
+
+    return(0);
 }
 
-int main()
+signed main()
 {
     _;
 
-	int n, m; cin >> n >> m;
-	vector<int> v(n);
-	for (int& i : v) cin >> i;
-
-	for (int i = 0; i < m; i++) {
-		auto vi = v;
-		for (int& j : vi) j = (j + i) % m;
-		cout << inv_count(vi) << endl;
+	int t = 1; //cin >> t;
+	while (t--) {
+		solve();
 	}
     
     return(0);
 }
+

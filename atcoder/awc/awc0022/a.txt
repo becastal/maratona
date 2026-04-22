@@ -1,0 +1,13 @@
+1.
+	1.a. Aplicando a formula: T = klog2(n+1), com k = 150ms, temos:
+	para  25 livros: T = klog2( 25 + 1) => T = 150 * 4.6 => T = 700ms
+	para  50 livros: T = klog2( 50 + 1) => T = 150 * 5.6 => T = 850ms
+	para 100 livros: T = klog2(100 + 1) => T = 150 * 6.6 => T = 1000ms
+
+2.
+	2.a. Alguns cuidados poderiam ser:
+		1. Fazer a lista aparecer no meio do cursor, e nao embaixo. Diminuiria o maximo D de todas as opcoes.
+		2. Fazer os ultimos itens da lista maiores, pra compensar o D com maior S.
+
+3.
+	3.a. 

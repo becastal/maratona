@@ -43,6 +43,7 @@ grafo:
 [7]: https://judge.beecrowd.com/pt/problems/view/2932
 [7]: https://codeforces.com/contest/2014/problem/E
 [7]: https://atcoder.jp/contests/abc373/tasks/abc373_d
+[7]: https://judge.beecrowd.com/pt/problems/view/2699
 [8]: https://atcoder.jp/contests/abc289/tasks/abc289_e
 [8]: https://codeforces.com/contest/1927/problem/F
 
@@ -63,6 +64,7 @@ ds:
 [5]: https://atcoder.jp/contests/abc382/tasks/abc382_c
 [5]: https://codeforces.com/problemset/problem/2008/D
 [5]: https://codeforces.com/contest/1791/problem/F
+[6]: https://judge.beecrowd.com/pt/problems/view/2700
 [6]: https://codeforces.com/contest/847/problem/B
 [6]: https://codeforces.com/contest/2139/problem/D
 [7]: https://codeforces.com/gym/104466/problem/I
@@ -106,3 +108,4 @@ outros problemas maneiros:
 [6]: https://codeforces.com/contest/1931/problem/E
 [6]: https://atcoder.jp/contests/arc208/tasks/arc208_b
 [7]: https://atcoder.jp/contests/abc374/tasks/abc374_d
+[2]: https://www.codechef.com/problems/DICEERMAX

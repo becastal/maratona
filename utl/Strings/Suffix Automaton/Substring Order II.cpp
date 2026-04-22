@@ -104,6 +104,8 @@ namespace sam {
 int solve() {
 	string T; cin >> T;
 	int k, n = (int)T.size(); cin >> k;
+	if (n * (n + 1) / 2 < k) return cout << "No such line." << endl, 0;
+
 	sam::init();
 
 	for (int i = 0; i < n; i++) {

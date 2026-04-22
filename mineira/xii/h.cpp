@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define endl '\n'
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+typedef long long ll;
+using namespace std;
+#define int ll
+
+int solve() {
+	int n; cin >> n;
+	vector<int> A(1 << n), C(n + 1);
+
+	for (int& i : A) {
+		cin >> i;
+		C[i]++;
+	}
+
+	for (int i = n, c = 1; i >= 1; i--) {
+		if (C[i] != c) return cout << -1 << endl, 0;
+		c <<= 1;
+	}
+
+	
+
+	return(0);
+}
+
+signed main()
+{
+    _;
+
+	int t = 1; //cin >> t;
+	while (t--) {
+		solve();
+	}
+    
+    return(0);
+}
+

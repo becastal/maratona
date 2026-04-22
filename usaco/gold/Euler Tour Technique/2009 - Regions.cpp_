@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define endl '\n'
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+typedef long long ll;
+using namespace std;
+
+struct Bit {
+	int n;
+	vector<int> F;
+
+	Bit(int n_) : n(n_), F(n+1) {};
+	void update(int i, int x) {
+		for (i++; i <= n; i+=i&-i) {
+			F[i] += x;
+		}
+	}
+
+	int pref(int i) {
+		int res = 0;
+		for (i++; i; i-=i&-i) {
+			res += F[i];
+		}
+		return res;
+	}
+};
+
+int solve() {
+	int n, r, q; cin >> n >> r >> q;
+	vector<int> Pai(n, -1), Cor(n);
+	vector<vector<int>> G(n), Ocor(r);
+
+	for (int i = 0; i < n; i++) {
+		if (i) {
+			cin >> Pai[i]; Pai[i]--;
+			cin >> Cor[i]; Cor[i]--;
+			G[Pai[i]].push_back(i);
+		} else {
+			cin >> Cor[i]; Cor[i]--;
+		}
+		Ocor[Cor[i]].push_back(i);
+	}
+
+	int t = 0;
+	vector<int> L(n), R(n);
+	function<void(int)> dfs = [&](int u) {
+		L[u] = t++;
+		for (int v : G[u]) {
+			dfs(v);
+		}
+		R[u] = t;
+	};
+	dfs(0);
+
+	Bit bit(n);
+	vector<vector<ll>> Res(r, vector<ll>(r));
+	for (int r1 = 0; r1 < r; r1++) {
+		for (int u : Ocor[r1]) {
+			bit.update(L[u], +1);
+			bit.update(R[u], -1);
+		}
+		
+		for (int r2 = 0; r2 < r; r2++) {
+			for (int u : Ocor[r2]) {
+				Res[r1][r2] += bit.pref(L[u]);
+			}
+		}
+
+		for (int u : Ocor[r1]) {
+			bit.update(L[u], -1);
+			bit.update(R[u], +1);
+		}
+	}
+
+	for (int i = 0, r1, r2; i < q; i++) {
+		cin >> r1 >> r2; r1--, r2--;
+		cout << Res[r1][r2] << endl;
+		cout << flush;
+	}
+
+	return(0);
+}
+
+signed main()
+{
+    //_;
+
+	int t = 1; //cin >> t;
+	while (t--) {
+		solve();
+	}
+    
+    return(0);
+}
+

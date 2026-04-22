@@ -5,6 +5,7 @@
 #define rall(x) (x).rbegin(), (x).rend()
 typedef long long ll;
 using namespace std;
+#define int ll
 
 int solve() {
 
@@ -17,14 +18,15 @@ void setIO(string nome) {
 	freopen((nome + ".out").c_str(), "w", stdout);
 }
 
-int main() {
+signed main()
+{
     _;
 	setIO("");
 
-	int t = 1; cin >> t;
+	int t = 1; //cin >> t;
 	while (t--) {
 		solve();
 	}
-
+    
     return(0);
 }

@@ -1,3 +1,0 @@
-int num;
-
-cin>>num;

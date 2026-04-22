@@ -1,5 +1,0 @@
-
-
-problemas a falar sobre:
-https://codeforces.com/problemset/problem/235/C
-https://codeforces.com/gym/103388/problem/B

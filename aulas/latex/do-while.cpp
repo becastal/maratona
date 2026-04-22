@@ -1,3 +1,0 @@
-do{
-    // logica
-} while(condicao)

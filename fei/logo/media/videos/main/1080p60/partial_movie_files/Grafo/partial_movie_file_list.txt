@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/home/becastal/Documents/maratona/fei/logo/media/videos/main/1080p60/partial_movie_files/Grafo/3544663784_4264541902_138646731.mp4'
-file 'file:/home/becastal/Documents/maratona/fei/logo/media/videos/main/1080p60/partial_movie_files/Grafo/260329756_1328805869_3529900550.mp4'
-file 'file:/home/becastal/Documents/maratona/fei/logo/media/videos/main/1080p60/partial_movie_files/Grafo/260329756_1583022276_2596420940.mp4'
-file 'file:/home/becastal/Documents/maratona/fei/logo/media/videos/main/1080p60/partial_movie_files/Grafo/260329756_2688965532_2680303066.mp4'

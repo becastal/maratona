@@ -1,0 +1,61 @@
+# Local session/tooling state
+.codex
+
+# Editor swap and backup files
+*.swp
+*.swo
+*.swn
+*.un~
+*~
+
+# C/C++ and general build outputs
+a.out
+*.out
+*.exe
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.class
+build/
+
+# Contest scratch input/output files
+in
+out
+input
+output
+input.txt
+output.txt
+*.ans
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# LaTeX build products
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.run.xml
+
+# Manim/rendered media output
+**/media/videos/
+**/media/images/
+**/media/Tex/
+**/partial_movie_files/
+
+# OS metadata
+.DS_Store
+Thumbs.db
